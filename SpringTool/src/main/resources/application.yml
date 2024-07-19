@@ -1,0 +1,10 @@
+database:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: "jdbc:mysql://localhost:3306/hua?useUnicode=true&useSSL=false&allowLoadLocalInfile=false&failOverReadOnly=false&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8&connectTimeout=1000&socketTimeout=30000"
+    username: "sly"
+    password: 
+# 是否忽略表前缀
+ignore_table_prefix: true
+
+# 参数bean后缀
+suffix_bean_param : Query

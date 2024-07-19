@@ -1,0 +1,7 @@
+com/example/bean/TableInfo.class
+com/example/utils/YmlUtils.class
+com/example/utils/StringUtils.class
+com/example/builder/BuildTable.class
+com/example/RunApplication.class
+com/example/bean/Constants.class
+com/example/bean/FieldInfo.class
