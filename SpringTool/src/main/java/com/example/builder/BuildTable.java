@@ -3,7 +3,7 @@ import com.example.utils.*;
 
 import java.sql.Connection;
 
-import javax.naming.spi.DirectoryManager;
+
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
@@ -63,8 +63,6 @@ public class BuildTable {
     public static void getKeyIndex(TableInfo tableInfo) {
         PreparedStatement ps = null;
         ResultSet keyResult = null;
-
-        List<TableInfo> tableInfoList = new ArrayList();
 
         try {
             ps = conn.prepareStatement(String.format(SQL_SHOW_TABLE_INDEX, tableInfo.getTableName()));
@@ -145,10 +143,9 @@ public class BuildTable {
 
                 tableInfo.setBeanParamName(beanName + Constants.SUFFIX_BEAN_PARAM);
                 // logger.info("param:" + processField(tableInfo.getBeanParamName(), true));
-                List<FieldInfo> fieldInfoList = getFields(tableInfo);
-                // getKeyIndex(tableInfo);
-                logger.info("表: {}", JsonUtils.convertObj2Json(tableInfo));
-                logger.info("字段: {}", JsonUtils.convertObj2Json(fieldInfoList));
+                getFields(tableInfo);
+                getKeyIndex(tableInfo);
+                logger.info("{}", JsonUtils.convertObj2Json(tableInfo));
             }
         } catch (Exception e) {
             logger.error("read table miss", e);
@@ -178,7 +175,7 @@ public class BuildTable {
         }
     }
     // 获取字段的信息
-    public static List<FieldInfo> getFields(TableInfo tableInfo) {
+    public static void getFields(TableInfo tableInfo) {
         PreparedStatement ps = null;
         ResultSet fieldResult = null;
 
@@ -202,7 +199,6 @@ public class BuildTable {
                 FieldInfo fieldInfo = new FieldInfo();
 
                 fieldInfoList.add(fieldInfo);
-                tableInfo.setFieldList(fieldInfoList);
                 fieldInfo.setFieldName(field);
                 fieldInfo.setComment(comment);
                 fieldInfo.setSqlType(type);
@@ -224,6 +220,7 @@ public class BuildTable {
                 } else {
                     tableInfo.setHavaBigDecimal(false);
                 }
+                tableInfo.setFieldList(fieldInfoList);
             }
         } catch (Exception e) {
             logger.error("读取表信息失败", e);
@@ -245,7 +242,6 @@ public class BuildTable {
             }
         }
 
-        return fieldInfoList;
     }
     private static String processJavaType(String type) {
         if (ArrayUtils.contains(Constants.SQL_INTEGER_TYPE, type)) {
