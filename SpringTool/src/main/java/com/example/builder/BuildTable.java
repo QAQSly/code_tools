@@ -146,7 +146,7 @@ public class BuildTable {
                 tableInfo.setBeanParamName(beanName + Constants.SUFFIX_BEAN_PARAM);
                 // logger.info("param:" + processField(tableInfo.getBeanParamName(), true));
                 List<FieldInfo> fieldInfoList = getFields(tableInfo);
-                getKeyIndex(tableInfo);
+                // getKeyIndex(tableInfo);
                 logger.info("表: {}", JsonUtils.convertObj2Json(tableInfo));
                 logger.info("字段: {}", JsonUtils.convertObj2Json(fieldInfoList));
             }
