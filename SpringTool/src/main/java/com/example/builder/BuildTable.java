@@ -85,7 +85,9 @@ public class BuildTable {
                 
                 tableInfo.setBeanParamName(beanName + Constants.SUFFIX_BEAN_PARAM);
                 logger.info("param:" + processField(tableInfo.getBeanParamName(), true));
-                getFields(tableInfo);
+                List<FieldInfo> fieldInfoList = getFields(tableInfo);
+                logger.info("表: {}", JsonUtils.convertObj2Json(tableInfo));
+                logger.info("字段: {}", JsonUtils.convertObj2Json(fieldInfoList));
             }
         } catch (Exception e) {
             logger.error("read table miss", e);
@@ -155,8 +157,8 @@ public class BuildTable {
                     tableInfo.setHavaBigDecimal(true);
                 }
               
-                logger.info("{}\t{}\t{}\t{}\t{}",field, type, extra, propertyName, comment);
-                logger.info("{}", fieldInfo.getJavaType());
+                // logger.info("{}\t{}\t{}\t{}\t{}",field, type, extra, propertyName, comment);
+                // logger.info("{}", fieldInfo.getJavaType());
             }
         } catch (Exception e) {
             logger.error("read table miss", e);
