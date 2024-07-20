@@ -23,7 +23,7 @@ public class BuildTable {
     private static Connection conn = null;
     private static String SQL_SHOW_TABLE_STATUS = "show table status";
     private static String SQL_SHOW_TABLE_FIELDS = "show full fields from %s";
-
+    private static String SQL_SHOW_TABLE_INDEX = "show index from %s";
     static {
        String dirverName = YmlUtils.getString("driverClassName");// 获取mysql驱动
        String url = YmlUtils.getString("url");
@@ -58,6 +58,66 @@ public class BuildTable {
         // logger.info("处理过的字段" + sb.toString());
         return sb.toString();
     }
+
+    // 获取唯一索引信息
+    public static void getKeyIndex(TableInfo tableInfo) {
+        PreparedStatement ps = null;
+        ResultSet tableResult = null;
+
+        List<TableInfo> tableInfoList = new ArrayList();
+
+        try {
+            ps = conn.prepareStatement(String.format(SQL_SHOW_TABLE_INDEX, tableInfo.getTableName()));
+
+            tableResult = ps.executeQuery();
+            while (tableResult.next()) {
+                Integer nonUnique = tableResult.getInt("non_unique");
+                String keyName = tableResult.getString("key_name");
+                String columnName = tableResult.getString("column_name");
+                if (0 == nonUnique) {
+                    continue;
+                }
+                List<FieldInfo> keyFieldList = tableInfo.getKeyIndexMap().get(keyName);
+                if (null == keyFieldList) {
+                    keyFieldList = new ArrayList<>();
+                    tableInfo.getKeyIndexMap().put(keyName, keyFieldList);
+                }
+
+                for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
+                    if (fieldInfo.getFieldName().equals(columnName)) {
+                        keyFieldList.add(fieldInfo);
+                    }
+                }
+
+            }
+
+        } catch (Exception e) {
+            logger.error("读取索引失败", e);
+        } finally {
+
+            if (tableResult != null) {
+                try {
+                    tableResult.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
     // 获取表信息
     public static void getTables() {
         PreparedStatement ps = null;
@@ -86,6 +146,7 @@ public class BuildTable {
                 tableInfo.setBeanParamName(beanName + Constants.SUFFIX_BEAN_PARAM);
                 // logger.info("param:" + processField(tableInfo.getBeanParamName(), true));
                 List<FieldInfo> fieldInfoList = getFields(tableInfo);
+                getKeyIndex(tableInfo);
                 logger.info("表: {}", JsonUtils.convertObj2Json(tableInfo));
                 logger.info("字段: {}", JsonUtils.convertObj2Json(fieldInfoList));
             }
@@ -141,6 +202,7 @@ public class BuildTable {
                 FieldInfo fieldInfo = new FieldInfo();
 
                 fieldInfoList.add(fieldInfo);
+                tableInfo.setFieldList(fieldInfoList);
                 fieldInfo.setFieldName(field);
                 fieldInfo.setComment(comment);
                 fieldInfo.setSqlType(type);
@@ -156,9 +218,6 @@ public class BuildTable {
                 if (ArrayUtils.contains(Constants.SQL_DECIMAL_TYPE, type)) {
                     tableInfo.setHavaBigDecimal(true);
                 }
-              
-                // logger.info("{}\t{}\t{}\t{}\t{}",field, type, extra, propertyName, comment);
-                // logger.info("{}", fieldInfo.getJavaType());
             }
         } catch (Exception e) {
             logger.error("read table miss", e);
