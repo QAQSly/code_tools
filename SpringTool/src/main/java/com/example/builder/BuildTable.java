@@ -74,7 +74,7 @@ public class BuildTable {
                 Integer nonUnique = keyResult.getInt("non_unique");
                 String keyName = keyResult.getString("key_name");
                 String columnName = keyResult.getString("column_name");
-                if (0 != nonUnique) {
+                if (1 == nonUnique) {
                     continue;
                 }
                 List<FieldInfo> keyFieldList = tableInfo.getKeyIndexMap().get(keyName);
