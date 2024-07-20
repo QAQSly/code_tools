@@ -25,6 +25,8 @@ public class TableInfo {
     private Map<String, List<FieldInfo>> keyIndexMap = new LinkedHashMap();
     // date
     private Boolean haveDate;
+    // date time
+    private Boolean haveDateTime;
     // decimal
     private Boolean havaBigDecimal;
 }

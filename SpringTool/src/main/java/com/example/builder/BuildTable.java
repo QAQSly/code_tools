@@ -145,7 +145,15 @@ public class BuildTable {
                 fieldInfo.setIsAutoIncrement("auto_increment".equalsIgnoreCase(extra) ? true : false);
                 fieldInfo.setPropertyName(propertyName);
                 fieldInfo.setJavaType(processJavaType(type));
-                
+                if (ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, type)) {
+                    tableInfo.setHaveDateTime(true);
+                }
+                if (ArrayUtils.contains(Constants.SQL_DATE_TYPES, type)) {
+                    tableInfo.setHaveDate(true);
+                }
+                if (ArrayUtils.contains(Constants.SQL_DECIMAL_TYPE, type)) {
+                    tableInfo.setHavaBigDecimal(true);
+                }
               
                 logger.info("{}\t{}\t{}\t{}\t{}",field, type, extra, propertyName, comment);
                 logger.info("{}", fieldInfo.getJavaType());
