@@ -111,7 +111,7 @@ public class BuildTable {
                 }
 
                 tableInfo.setBeanParamName(beanName + Constants.SUFFIX_BEAN_PARAM);
-                // getFields(tableInfo);
+                getFields(tableInfo);
                 // getKeyIndex(tableInfo);
                 logger.info("{}", JsonUtils.convertObj2Json(tableInfo));
             }
