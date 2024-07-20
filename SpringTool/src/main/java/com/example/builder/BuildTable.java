@@ -211,16 +211,22 @@ public class BuildTable {
                 fieldInfo.setJavaType(processJavaType(type));
                 if (ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, type)) {
                     tableInfo.setHaveDateTime(true);
+                } else {
+                    tableInfo.setHaveDateTime(false);
                 }
                 if (ArrayUtils.contains(Constants.SQL_DATE_TYPES, type)) {
                     tableInfo.setHaveDate(true);
+                } else {
+                    tableInfo.setHaveDateTime(false);
                 }
                 if (ArrayUtils.contains(Constants.SQL_DECIMAL_TYPE, type)) {
                     tableInfo.setHavaBigDecimal(true);
+                } else {
+                    tableInfo.setHavaBigDecimal(false);
                 }
             }
         } catch (Exception e) {
-            logger.error("read table miss", e);
+            logger.error("读取表信息失败", e);
         } finally {
             
             if (fieldResult != null) {
