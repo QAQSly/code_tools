@@ -163,8 +163,9 @@ public class BuildTable {
                 } else {
                     tableInfo.setHavaBigDecimal(false);
                 }
-                tableInfo.setFieldList(fieldInfoList);
+
             }
+            tableInfo.setFieldList(fieldInfoList);
         } catch (Exception e) {
             logger.error("读取字段信息失败", e);
         }
