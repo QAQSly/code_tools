@@ -74,7 +74,7 @@ public class BuildTable {
                 Integer nonUnique = keyResult.getInt("non_unique");
                 String keyName = keyResult.getString("key_name");
                 String columnName = keyResult.getString("column_name");
-                if (0 == nonUnique) {
+                if (0 != nonUnique) {
                     continue;
                 }
                 List<FieldInfo> keyFieldList = tableInfo.getKeyIndexMap().get(keyName);
@@ -122,12 +122,12 @@ public class BuildTable {
     public static void getTables() {
         PreparedStatement ps = null;
         ResultSet tableResult = null;
-    
+
         List<TableInfo> tableInfoList = new ArrayList();
 
         try {
             ps = conn.prepareStatement(SQL_SHOW_TABLE_STATUS);
-            
+
             tableResult = ps.executeQuery();
             while (tableResult.next()) {
                 String tableName = tableResult.getString("name");
@@ -136,13 +136,13 @@ public class BuildTable {
                 TableInfo tableInfo = new TableInfo();
                 tableInfo.setTableName(tableName);
                 tableInfo.setComment(comment);
-                
+
                 String beanName = tableName;
                 if (Constants.IGNORE_TABLE_PREFIX) {
                     beanName = tableName.substring(beanName.indexOf("_") + 1);
-                    
+
                 }
-                
+
                 tableInfo.setBeanParamName(beanName + Constants.SUFFIX_BEAN_PARAM);
                 // logger.info("param:" + processField(tableInfo.getBeanParamName(), true));
                 List<FieldInfo> fieldInfoList = getFields(tableInfo);
@@ -153,27 +153,27 @@ public class BuildTable {
         } catch (Exception e) {
             logger.error("read table miss", e);
         } finally {
-            
+
             if (tableResult != null) {
-                try {     
+                try {
                     tableResult.close();
                 } catch (SQLException e) {
-                    e.printStackTrace();             
+                    e.printStackTrace();
                 }
             }
             if (ps != null) {
-                try {     
+                try {
                     ps.close();
                 } catch (SQLException e) {
-                    e.printStackTrace();             
+                    e.printStackTrace();
                 }
-            }            
+            }
             if (conn != null) {
-                try {     
+                try {
                     conn.close();
                 } catch (SQLException e) {
-                    e.printStackTrace();             
-                } 
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -181,24 +181,24 @@ public class BuildTable {
     public static List<FieldInfo> getFields(TableInfo tableInfo) {
         PreparedStatement ps = null;
         ResultSet fieldResult = null;
-    
+
         List<FieldInfo> fieldInfoList = new ArrayList();
 
         try {
             ps = conn.prepareStatement(String.format(SQL_SHOW_TABLE_FIELDS,tableInfo.getTableName()));
-            
+
             fieldResult = ps.executeQuery();
             while (fieldResult.next()) {
                 String comment = fieldResult.getString("comment");
                 String field = fieldResult.getString("field");
                 String type = fieldResult.getString("type");
                 String extra = fieldResult.getString("extra");
-                
+
                 if (type.indexOf("(") > 0) {
                     type = type.substring(0, type.indexOf("("));
                 }
-                
-                String propertyName = processField(field, false); 
+
+                String propertyName = processField(field, false);
                 FieldInfo fieldInfo = new FieldInfo();
 
                 fieldInfoList.add(fieldInfo);
@@ -228,24 +228,24 @@ public class BuildTable {
         } catch (Exception e) {
             logger.error("读取表信息失败", e);
         } finally {
-            
+
             if (fieldResult != null) {
-                try {     
+                try {
                     fieldResult.close();
                 } catch (SQLException e) {
-                    e.printStackTrace();             
+                    e.printStackTrace();
                 }
             }
             if (ps != null) {
-                try {     
+                try {
                     ps.close();
                 } catch (SQLException e) {
-                    e.printStackTrace();             
+                    e.printStackTrace();
                 }
-            }           
+            }
         }
-        
-        return fieldInfoList; 
+
+        return fieldInfoList;
     }
     private static String processJavaType(String type) {
         if (ArrayUtils.contains(Constants.SQL_INTEGER_TYPE, type)) {
