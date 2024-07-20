@@ -55,7 +55,7 @@ public class BuildTable {
             // logger.info("大写的字段是" + fields[i]);
             sb.append(StringUtils.upperCaseFirstLetter(fields[i]));
         }
-        logger.info("处理过的字段" + sb.toString());
+        // logger.info("处理过的字段" + sb.toString());
         return sb.toString();
     }
     // 获取表信息
@@ -84,7 +84,7 @@ public class BuildTable {
                 }
                 
                 tableInfo.setBeanParamName(beanName + Constants.SUFFIX_BEAN_PARAM);
-                logger.info("param:" + processField(tableInfo.getBeanParamName(), true));
+                // logger.info("param:" + processField(tableInfo.getBeanParamName(), true));
                 List<FieldInfo> fieldInfoList = getFields(tableInfo);
                 logger.info("表: {}", JsonUtils.convertObj2Json(tableInfo));
                 logger.info("字段: {}", JsonUtils.convertObj2Json(fieldInfoList));
