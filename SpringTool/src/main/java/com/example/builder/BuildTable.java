@@ -62,18 +62,18 @@ public class BuildTable {
     // 获取唯一索引信息
     public static void getKeyIndex(TableInfo tableInfo) {
         PreparedStatement ps = null;
-        ResultSet tableResult = null;
+        ResultSet keyResult = null;
 
         List<TableInfo> tableInfoList = new ArrayList();
 
         try {
             ps = conn.prepareStatement(String.format(SQL_SHOW_TABLE_INDEX, tableInfo.getTableName()));
 
-            tableResult = ps.executeQuery();
-            while (tableResult.next()) {
-                Integer nonUnique = tableResult.getInt("non_unique");
-                String keyName = tableResult.getString("key_name");
-                String columnName = tableResult.getString("column_name");
+            keyResult = ps.executeQuery();
+            while (keyResult.next()) {
+                Integer nonUnique = keyResult.getInt("non_unique");
+                String keyName = keyResult.getString("key_name");
+                String columnName = keyResult.getString("column_name");
                 if (0 == nonUnique) {
                     continue;
                 }
@@ -95,9 +95,9 @@ public class BuildTable {
             logger.error("读取索引失败", e);
         } finally {
 
-            if (tableResult != null) {
+            if (keyResult != null) {
                 try {
-                    tableResult.close();
+                    keyResult.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
