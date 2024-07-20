@@ -61,13 +61,11 @@ public class BuildTable {
 
     // 获取唯一索引信息
     public static void getKeyIndex(TableInfo tableInfo) {
-        PreparedStatement ps = null;
-        ResultSet keyResult = null;
 
-        try {
-            ps = conn.prepareStatement(String.format(SQL_SHOW_TABLE_INDEX, tableInfo.getTableName()));
 
-            keyResult = ps.executeQuery();
+        try(PreparedStatement ps = conn.prepareStatement(String.format(SQL_SHOW_TABLE_INDEX, tableInfo.getTableName())); ResultSet keyResult = ps.executeQuery()) {
+
+
             while (keyResult.next()) {
                 Integer nonUnique = keyResult.getInt("non_unique");
                 String keyName = keyResult.getString("key_name");
@@ -91,46 +89,17 @@ public class BuildTable {
 
         } catch (Exception e) {
             logger.error("读取索引失败", e);
-        } finally {
-
-            if (keyResult != null) {
-                try {
-                    keyResult.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
     // 获取表信息
     public static void getTables() {
-        PreparedStatement ps = null;
-        ResultSet tableResult = null;
 
-        List<TableInfo> tableInfoList = new ArrayList();
+        try (PreparedStatement ps = conn.prepareStatement(SQL_SHOW_TABLE_STATUS);
+        ResultSet tableResult = ps.executeQuery()) {
 
-        try {
-            ps = conn.prepareStatement(SQL_SHOW_TABLE_STATUS);
-
-            tableResult = ps.executeQuery();
             while (tableResult.next()) {
                 String tableName = tableResult.getString("name");
                 String comment = tableResult.getString("comment");
-                // logger.info("tableName is {}, comment is {}", tableName, comment);
                 TableInfo tableInfo = new TableInfo();
                 tableInfo.setTableName(tableName);
                 tableInfo.setComment(comment);
@@ -142,49 +111,23 @@ public class BuildTable {
                 }
 
                 tableInfo.setBeanParamName(beanName + Constants.SUFFIX_BEAN_PARAM);
-                // logger.info("param:" + processField(tableInfo.getBeanParamName(), true));
                 getFields(tableInfo);
                 getKeyIndex(tableInfo);
                 logger.info("{}", JsonUtils.convertObj2Json(tableInfo));
             }
         } catch (Exception e) {
-            logger.error("read table miss", e);
-        } finally {
-
-            if (tableResult != null) {
-                try {
-                    tableResult.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            logger.error("读取表信息失败", e);
         }
+
     }
     // 获取字段的信息
     public static void getFields(TableInfo tableInfo) {
-        PreparedStatement ps = null;
-        ResultSet fieldResult = null;
 
         List<FieldInfo> fieldInfoList = new ArrayList();
 
-        try {
-            ps = conn.prepareStatement(String.format(SQL_SHOW_TABLE_FIELDS,tableInfo.getTableName()));
+        try (PreparedStatement ps = conn.prepareStatement(String.format(SQL_SHOW_TABLE_FIELDS, tableInfo.getTableName()));
+        ResultSet fieldResult = ps.executeQuery()) {
 
-            fieldResult = ps.executeQuery();
             while (fieldResult.next()) {
                 String comment = fieldResult.getString("comment");
                 String field = fieldResult.getString("field");
@@ -223,24 +166,9 @@ public class BuildTable {
                 tableInfo.setFieldList(fieldInfoList);
             }
         } catch (Exception e) {
-            logger.error("读取表信息失败", e);
-        } finally {
-
-            if (fieldResult != null) {
-                try {
-                    fieldResult.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            logger.error("读取字段信息失败", e);
         }
+
 
     }
     private static String processJavaType(String type) {
