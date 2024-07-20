@@ -127,7 +127,7 @@ public class BuildTable {
 
         try (PreparedStatement ps = conn.prepareStatement(String.format(SQL_SHOW_TABLE_FIELDS, tableInfo.getTableName()));
         ResultSet fieldResult = ps.executeQuery()) {
-
+            FieldInfo fieldInfo = new FieldInfo();
             while (fieldResult.next()) {
                 String comment = fieldResult.getString("comment");
                 String field = fieldResult.getString("field");
@@ -139,9 +139,9 @@ public class BuildTable {
                 }
 
                 String propertyName = processField(field, false);
-                FieldInfo fieldInfo = new FieldInfo();
 
-                fieldInfoList.add(fieldInfo);
+
+
                 fieldInfo.setFieldName(field);
                 fieldInfo.setComment(comment);
                 fieldInfo.setSqlType(type);
@@ -165,6 +165,7 @@ public class BuildTable {
                 }
 
             }
+            fieldInfoList.add(fieldInfo);
             tableInfo.setFieldList(fieldInfoList);
         } catch (Exception e) {
             logger.error("读取字段信息失败", e);
