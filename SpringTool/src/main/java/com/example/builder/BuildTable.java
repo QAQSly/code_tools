@@ -153,6 +153,9 @@ public class BuildTable {
                 fieldInfo.setIsAutoIncrement("auto_increment".equalsIgnoreCase(extra) ? true : false);
                 fieldInfo.setPropertyName(propertyName);
                 fieldInfo.setJavaType(processJavaType(type));
+                tableInfo.setHaveDate(false);
+                tableInfo.setHaveDateTime(false);
+                tableInfo.setHavaBigDecimal(false);
                 if (ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, type)) {
                     tableInfo.setHaveDateTime(true);
                 }

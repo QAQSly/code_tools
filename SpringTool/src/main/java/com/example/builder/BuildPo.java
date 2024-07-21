@@ -1,6 +1,7 @@
 package com.example.builder;
 
 import com.example.bean.Constants;
+import com.example.bean.FieldInfo;
 import com.example.bean.TableInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,9 +29,28 @@ public class BuildPo {
             bw.newLine();
             bw.write("import java.io.Serializable;");
             bw.newLine();
+            if (tableInfo.getHaveDate() || tableInfo.getHaveDateTime()) {
+                bw.write("import java.util.Date;");
+                bw.newLine();
+            }
+            if (tableInfo.getHavaBigDecimal()) {
+                bw.write("import java.math.BigDecimal;");
+            }
+            bw.write("import lombok.Getter;\n" + "import lombok.Setter;");
             bw.newLine();
+            bw.newLine();
+
+            //  get set
+            bw.write("@Getter\n" + "@Setter");
             bw.write("public class " + tableInfo.getBeanName() + " implements Serializable {");
             bw.newLine();
+
+            for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
+                bw.write("\tprivate " + fieldInfo.getJavaType() + " " + fieldInfo.getPropertyName() + ";");
+                bw.newLine();
+                bw.newLine();
+            }
+
             bw.write("}");
             bw.flush();
 
