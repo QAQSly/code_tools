@@ -109,6 +109,7 @@ public class BuildTable {
                     beanName = tableName.substring(beanName.indexOf("_") + 1);
 
                 }
+                beanName = processField(beanName, true);
                 tableInfo.setBeanName(beanName);
 
                 tableInfo.setBeanParamName(beanName + Constants.SUFFIX_BEAN_PARAM);
