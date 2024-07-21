@@ -40,7 +40,10 @@ public class BuildPo {
             bw.newLine();
             bw.newLine();
 
-            //  get set
+            //  comment
+            BuildComment.createClassComment(bw, tableInfo.getComment());
+            bw.newLine();
+            // get set
             bw.write("@Getter\n" + "@Setter");
             bw.newLine();
             bw.write("public class " + tableInfo.getBeanName() + " implements Serializable {");
@@ -56,7 +59,7 @@ public class BuildPo {
             bw.flush();
 
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
