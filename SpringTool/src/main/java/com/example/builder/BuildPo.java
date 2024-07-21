@@ -14,11 +14,5 @@ public class BuildPo {
             folder.mkdirs();
         }
 
-        File file = new File(folder, tableInfo.getBeanName() + ".java");
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
