@@ -15,9 +15,8 @@ public class BuildPo {
         if (!folder.exists()) {
             folder.mkdirs();
         }
-        logger.info("---{}---{}", tableInfo.getTableName(), tableInfo.getBeanName());
+        // logger.info("---{}---{}", tableInfo.getTableName(), tableInfo.getBeanName());
 
-        /*
         File poFile = new File(folder, tableInfo.getBeanName() + ".java");
 
         try (OutputStream  out = new FileOutputStream(poFile);
@@ -36,7 +35,7 @@ public class BuildPo {
 
         } catch (IOException e) {
             e.printStackTrace();
-        } */
+        }
 
 
 

@@ -102,13 +102,14 @@ public class BuildTable {
                 String comment = tableResult.getString("comment");
                 TableInfo tableInfo = new TableInfo();
                 tableInfo.setTableName(tableName);
-                tableInfo.setComment(comment);
+                tableInfo.setComment(comment);;
 
                 String beanName = tableName;
                 if (Constants.IGNORE_TABLE_PREFIX) {
                     beanName = tableName.substring(beanName.indexOf("_") + 1);
 
                 }
+                tableInfo.setBeanName(beanName);
 
                 tableInfo.setBeanParamName(beanName + Constants.SUFFIX_BEAN_PARAM);
                 getFields(tableInfo);
