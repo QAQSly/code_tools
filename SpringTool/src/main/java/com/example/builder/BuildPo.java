@@ -15,6 +15,7 @@ public class BuildPo {
         if (!folder.exists()) {
             folder.mkdirs();
         }
+        logger.info("---{}", tableInfo.getTableName());
 
         File poFile = new File(folder, tableInfo.getBeanName() + ".java");
 
