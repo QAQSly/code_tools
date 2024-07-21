@@ -155,18 +155,12 @@ public class BuildTable {
                 fieldInfo.setJavaType(processJavaType(type));
                 if (ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, type)) {
                     tableInfo.setHaveDateTime(true);
-                } else {
-                    tableInfo.setHaveDateTime(false);
                 }
                 if (ArrayUtils.contains(Constants.SQL_DATE_TYPES, type)) {
                     tableInfo.setHaveDate(true);
-                } else {
-                    tableInfo.setHaveDateTime(false);
                 }
                 if (ArrayUtils.contains(Constants.SQL_DECIMAL_TYPE, type)) {
                     tableInfo.setHavaBigDecimal(true);
-                } else {
-                    tableInfo.setHavaBigDecimal(false);
                 }
 
             }
