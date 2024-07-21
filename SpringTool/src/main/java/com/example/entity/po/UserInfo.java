@@ -5,8 +5,10 @@ import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 
-
-
+/**
+ *@Description: 用户信息表
+ *@Date: 7/21/24, 11:05 AM
+ */
 @Getter
 @Setter
 public class UserInfo implements Serializable {

@@ -4,4 +4,8 @@ com/example/utils/StringUtils.class
 com/example/builder/BuildTable.class
 com/example/RunApplication.class
 com/example/bean/Constants.class
+com/example/entity/po/UserInfo.class
 com/example/bean/FieldInfo.class
+com/example/builder/BuildComment.class
+com/example/utils/JsonUtils.class
+com/example/builder/BuildPo.class
