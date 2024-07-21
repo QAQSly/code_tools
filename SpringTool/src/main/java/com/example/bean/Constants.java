@@ -15,6 +15,8 @@ public class Constants {
     public static String PATH_PO;
     public static String PACKAGE_BASE;
     public static String PACKAGE_PO;
+
+    public static String AUTHOR;
     static {
         IGNORE_TABLE_PREFIX = Boolean.valueOf(YmlUtils.getString("ignore.table.prefix"));
         SUFFIX_BEAN_PARAM = YmlUtils.getString("suffix_bean_param");
@@ -26,6 +28,8 @@ public class Constants {
         PATH_PO = PATH_BASE + PATH_PO.replace(".", "/");
         PACKAGE_PO = YmlUtils.getString("package_po");
         PACKAGE_PO =  PACKAGE_BASE + "." +  PACKAGE_PO;
+
+        AUTHOR = YmlUtils.getString("author_comment");
     }
     public final static String[] SQL_DATE_TIME_TYPES = new String[]{"datetime", "timestamp"};
     public final static String[] SQL_DATE_TYPES = new String[]{"date"};
