@@ -25,7 +25,9 @@ public class BuildPo {
             // package
             bw.write("package " + Constants.PACKAGE_PO + ";");
             bw.newLine();
+            bw.newLine();
             bw.write("import java.io.Serializable;");
+            bw.newLine();
             bw.newLine();
             bw.write("public class " + tableInfo.getBeanName() + " implements Serializable {");
             bw.newLine();
