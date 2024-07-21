@@ -8,3 +8,11 @@ ignore_table_prefix: true
 
 # 参数bean后缀
 suffix_bean_param : Query
+
+# 文件输出路径
+path_base: ../main/
+
+#包名
+package_base: com.example
+package_po: entity.po
+package_param: entity.query

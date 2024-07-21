@@ -61,6 +61,6 @@ public class YmlUtils {
         return YAML_MAP.get(key);
     }
     public static void main(String[] args) {
-        System.out.println(getString("url"));
+        System.out.println(getString("path_base"));
     }
 }

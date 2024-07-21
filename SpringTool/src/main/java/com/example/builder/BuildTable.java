@@ -13,11 +13,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
+import java.util.*;
+
 import com.example.bean.*;
 
-import java.util.List;
-import java.util.ArrayList;
 public class BuildTable {
     private static final Logger logger = LoggerFactory.getLogger(BuildTable.class); 
     private static Connection conn = null;
@@ -66,6 +65,11 @@ public class BuildTable {
         try(PreparedStatement ps = conn.prepareStatement(String.format(SQL_SHOW_TABLE_INDEX, tableInfo.getTableName())); ResultSet keyResult = ps.executeQuery()) {
 
 
+            Map<String, FieldInfo> tempMap = new HashMap<>();
+            for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
+                tempMap.put(fieldInfo.getFieldName(), fieldInfo);
+            }
+
             while (keyResult.next()) {
                 Integer nonUnique = keyResult.getInt("non_unique");
                 String keyName = keyResult.getString("key_name");
@@ -79,12 +83,7 @@ public class BuildTable {
                     tableInfo.getKeyIndexMap().put(keyName, keyFieldList);
                 }
 
-                for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
-                    if (fieldInfo.getFieldName().equals(columnName)) {
-                        keyFieldList.add(fieldInfo);
-                    }
-                }
-
+                keyFieldList.add(tempMap.get(columnName));
             }
 
         } catch (Exception e) {
@@ -92,7 +91,8 @@ public class BuildTable {
         }
     }
     // 获取表信息
-    public static void getTables() {
+    public static List<TableInfo> getTables() {
+        List<TableInfo> tableInfoList = new ArrayList<>();
 
         try (PreparedStatement ps = conn.prepareStatement(SQL_SHOW_TABLE_STATUS);
         ResultSet tableResult = ps.executeQuery()) {
@@ -113,11 +113,14 @@ public class BuildTable {
                 tableInfo.setBeanParamName(beanName + Constants.SUFFIX_BEAN_PARAM);
                 getFields(tableInfo);
                 getKeyIndex(tableInfo);
-                logger.info("{}", JsonUtils.convertObj2Json(tableInfo));
+                tableInfoList.add(tableInfo);
+                //logger.info("{}", JsonUtils.convertObj2Json(tableInfo));
             }
+
         } catch (Exception e) {
             logger.error("读取表信息失败", e);
         }
+        return tableInfoList;
 
     }
     // 获取字段的信息
