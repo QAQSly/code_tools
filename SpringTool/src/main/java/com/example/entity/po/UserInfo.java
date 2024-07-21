@@ -7,6 +7,7 @@ import lombok.Setter;
 
 /**
  * @Description: 用户信息表
+ * @author: Sly
  * @Date: 2024/07/21
  */
 @Getter
