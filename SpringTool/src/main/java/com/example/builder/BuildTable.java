@@ -132,6 +132,9 @@ public class BuildTable {
 
         try (PreparedStatement ps = conn.prepareStatement(String.format(SQL_SHOW_TABLE_FIELDS, tableInfo.getTableName()));
         ResultSet fieldResult = ps.executeQuery()) {
+            Boolean haveDate = false;
+            Boolean haveDateTime = false;
+            Boolean haveBigDecimal = false;
 
             while (fieldResult.next()) {
                 String comment = fieldResult.getString("comment");
@@ -153,18 +156,20 @@ public class BuildTable {
                 fieldInfo.setIsAutoIncrement("auto_increment".equalsIgnoreCase(extra) ? true : false);
                 fieldInfo.setPropertyName(propertyName);
                 fieldInfo.setJavaType(processJavaType(type));
-                tableInfo.setHaveDate(false);
-                tableInfo.setHaveDateTime(false);
-                tableInfo.setHavaBigDecimal(false);
+
                 if (ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, type)) {
-                    tableInfo.setHaveDateTime(true);
+                    haveDateTime = true;
                 }
                 if (ArrayUtils.contains(Constants.SQL_DATE_TYPES, type)) {
-                    tableInfo.setHaveDate(true);
+                    haveDate = true;
                 }
                 if (ArrayUtils.contains(Constants.SQL_DECIMAL_TYPE, type)) {
-                    tableInfo.setHavaBigDecimal(true);
+                    haveBigDecimal = true;
                 }
+
+                tableInfo.setHaveDateTime(haveDateTime);
+                tableInfo.setHaveDate(haveDate);
+                tableInfo.setHavaBigDecimal(haveBigDecimal);
 
             }
 

@@ -42,6 +42,7 @@ public class BuildPo {
 
             //  get set
             bw.write("@Getter\n" + "@Setter");
+            bw.newLine();
             bw.write("public class " + tableInfo.getBeanName() + " implements Serializable {");
             bw.newLine();
 
