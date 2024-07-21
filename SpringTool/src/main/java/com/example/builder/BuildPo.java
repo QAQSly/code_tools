@@ -50,6 +50,7 @@ public class BuildPo {
             bw.newLine();
 
             for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
+                BuildComment.createFieldComment(bw, fieldInfo.getComment());
                 bw.write("\tprivate " + fieldInfo.getJavaType() + " " + fieldInfo.getPropertyName() + ";");
                 bw.newLine();
                 bw.newLine();

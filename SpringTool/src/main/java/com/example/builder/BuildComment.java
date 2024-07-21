@@ -21,7 +21,9 @@ public class BuildComment {
         bw.write(" */");
     }
 
-    public static void createFieldComment() {
+    public static void createFieldComment(BufferedWriter bw, String comment) throws Exception {
+        bw.write("\t//" + comment);
+        bw.newLine();
 
     }
 
