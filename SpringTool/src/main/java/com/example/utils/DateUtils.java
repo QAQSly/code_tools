@@ -9,6 +9,8 @@ public class DateUtils {
     public static final String YYYY_MM_DD_SLASH = "yyyy/MM/dd";
     public static final String YYYYMMDD = "yyyyMMdd";
 
+    public static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
+
     public static String format(Date date, String patten) {
         return new SimpleDateFormat(patten).format(date);
     }

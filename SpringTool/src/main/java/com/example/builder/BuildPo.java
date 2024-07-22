@@ -3,6 +3,8 @@ package com.example.builder;
 import com.example.bean.Constants;
 import com.example.bean.FieldInfo;
 import com.example.bean.TableInfo;
+import com.example.utils.DateUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,6 +34,10 @@ public class BuildPo {
             if (tableInfo.getHaveDate() || tableInfo.getHaveDateTime()) {
                 bw.write("import java.util.Date;");
                 bw.newLine();
+                bw.write(Constants.BEAN_DATE_FORMAT_CLASS + ";");
+                bw.newLine();
+                bw.write(Constants.BEAN_DATE_UNFORMAT_CLASS + ";");
+                bw.newLine();
             }
             if (tableInfo.getHavaBigDecimal()) {
                 bw.write("import java.math.BigDecimal;");
@@ -51,6 +57,10 @@ public class BuildPo {
 
             for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
                 BuildComment.createFieldComment(bw, fieldInfo.getComment());
+                if (ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, fieldInfo.getSqlType())) {
+                    bw.write("\t" + String.format(Constants.BEAN_DATE_FORMAT_EXPRESSION, DateUtils.YYYY_MM_DD_HH_MM_SS));
+                    bw.newLine();
+                }
                 bw.write("\tprivate " + fieldInfo.getJavaType() + " " + fieldInfo.getPropertyName() + ";");
                 bw.newLine();
                 bw.newLine();
