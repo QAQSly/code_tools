@@ -8,15 +8,15 @@ ignore_table_prefix: true
 
 # 需要忽略的属性
 ignore_bean_toJson_field: qq_open_id, status
-ignore_bean_toJson_expression: '@'JsonIgnore
+ignore_bean_toJson_expression: "@JsonIgnore"
 ignore_bean_toJson_class: import com.fasterxml.jackson.annotation.JsonIgnore
 
 # 日期格式序列化
-bean_date_format_expression: '@'JsonFormat(pattern = "%s", timezone = "GMT+3")
+bean_date_format_expression: "@JsonFormat(pattern = \"%s\", timezone = \"GMT+3\")"
 bean_date_format_class: import com.fasterxml.jackson.annotation.JsonFormat
 
 # 日期格式反序列化
-bean_date_unFormat_expression: '@'DateTimeFormat(pattern = "%s")
+bean_date_unFormat_expression: "@DateTimeFormat(pattern = \"%s\")"
 bean_date_unFormat_class: import org.springframework.format.annotation.DateTimeFormat
 
 # 参数bean后缀
