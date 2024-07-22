@@ -22,7 +22,7 @@ public class BuildComment {
     }
 
     public static void createFieldComment(BufferedWriter bw, String comment) throws Exception {
-        bw.write("\t//" + comment == null ? "" : comment);
+        bw.write("\t////" + comment == null ? "" : comment);
         bw.newLine();
 
     }
