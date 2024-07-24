@@ -72,6 +72,8 @@ public class BuildPo {
                     bw.write("\t" + String.format(Constants.BEAN_DATE_UNFORMAT_EXPRESSION, DateUtils.YYYY_MM_DD));
                     bw.newLine();
                 }
+                logger.info("------filed" + Constants.IGNORE_BEAN_TOJSON_FIELD.split(","));
+                logger.info("-----property" + fieldInfo.getPropertyName());
                 if (ArrayUtils.contains(Constants.IGNORE_BEAN_TOJSON_FIELD.split(","), fieldInfo.getPropertyName())) {
                     bw.write("\t" + String.format(Constants.IGNORE_BEAN_TOJSON_EXPRESSION));
                     bw.newLine();
