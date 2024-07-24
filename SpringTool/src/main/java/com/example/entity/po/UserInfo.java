@@ -55,4 +55,7 @@ public class UserInfo implements Serializable {
 	//总空间
 	private Long totalSpace;
 
+	//0: deleted, 1: normal
+	private Integer isDel;
+
 }
