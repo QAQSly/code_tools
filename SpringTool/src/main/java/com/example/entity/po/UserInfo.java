@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @Description: 用户信息表
@@ -15,6 +16,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@ToString
 public class UserInfo implements Serializable {
 	//用户ID
 	private String userId;

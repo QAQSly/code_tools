@@ -3,6 +3,7 @@ package com.example.builder;
 import com.example.bean.Constants;
 import com.example.bean.FieldInfo;
 import com.example.bean.TableInfo;
+import com.example.entity.po.UserInfo;
 import com.example.utils.DateUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
@@ -55,7 +56,7 @@ public class BuildPo {
                 bw.write("import java.math.BigDecimal;");
                 bw.newLine();
             }
-            bw.write("import lombok.Getter;\n" + "import lombok.Setter;");
+            bw.write("import lombok.Getter;\n" + "import lombok.Setter;\n" + "import lombok.ToString;\n");
             bw.newLine();
             bw.newLine();
 
@@ -63,7 +64,7 @@ public class BuildPo {
             BuildComment.createClassComment(bw, tableInfo.getComment());
             bw.newLine();
             // get set
-            bw.write("@Getter\n" + "@Setter");
+            bw.write("@Getter\n" + "@Setter\n" + "@ToString");
             bw.newLine();
             bw.write("public class " + tableInfo.getBeanName() + " implements Serializable {");
             bw.newLine();
@@ -94,6 +95,7 @@ public class BuildPo {
 
             bw.write("}");
             bw.flush();
+            logger.info("---bean---{}", new UserInfo());
 
 
         } catch (Exception e) {
