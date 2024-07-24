@@ -31,6 +31,8 @@ public class BuildPo {
             bw.newLine();
             bw.write("import java.io.Serializable;");
             bw.newLine();
+            bw.write(Constants.IGNORE_BEAN_TOJSON_CLASS);
+            bw.newLine();
             if (tableInfo.getHaveDate() || tableInfo.getHaveDateTime()) {
                 bw.write("import java.util.Date;");
                 bw.newLine();
@@ -41,6 +43,7 @@ public class BuildPo {
             }
             if (tableInfo.getHavaBigDecimal()) {
                 bw.write("import java.math.BigDecimal;");
+                bw.newLine();
             }
             bw.write("import lombok.Getter;\n" + "import lombok.Setter;");
             bw.newLine();
@@ -59,6 +62,18 @@ public class BuildPo {
                 BuildComment.createFieldComment(bw, fieldInfo.getComment());
                 if (ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, fieldInfo.getSqlType())) {
                     bw.write("\t" + String.format(Constants.BEAN_DATE_FORMAT_EXPRESSION, DateUtils.YYYY_MM_DD_HH_MM_SS));
+                    bw.newLine();
+                    bw.write("\t" + String.format(Constants.BEAN_DATE_UNFORMAT_EXPRESSION, DateUtils.YYYY_MM_DD_HH_MM_SS));
+                    bw.newLine();
+                }
+                if (ArrayUtils.contains(Constants.SQL_DATE_TYPES, fieldInfo.getSqlType())) {
+                    bw.write("\t" + String.format(Constants.BEAN_DATE_FORMAT_EXPRESSION, DateUtils.YYYY_MM_DD));
+                    bw.newLine();
+                    bw.write("\t" + String.format(Constants.BEAN_DATE_UNFORMAT_EXPRESSION, DateUtils.YYYY_MM_DD));
+                    bw.newLine();
+                }
+                if (ArrayUtils.contains(Constants.IGNORE_BEAN_TOJSON_FIELD.split(","), fieldInfo.getPropertyName())) {
+                    bw.write("\t" + String.format(Constants.IGNORE_BEAN_TOJSON_EXPRESSION));
                     bw.newLine();
                 }
                 bw.write("\tprivate " + fieldInfo.getJavaType() + " " + fieldInfo.getPropertyName() + ";");
