@@ -7,7 +7,7 @@ database:
 ignore_table_prefix: true
 
 # 需要忽略的属性
-ignore_bean_toJson_field: qq_open_id, status
+ignore_bean_toJson_field: qqOpenId,status
 ignore_bean_toJson_expression: "@JsonIgnore"
 ignore_bean_toJson_class: import com.fasterxml.jackson.annotation.JsonIgnore
 
