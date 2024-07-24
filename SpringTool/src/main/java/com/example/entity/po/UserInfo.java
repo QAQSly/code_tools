@@ -26,6 +26,7 @@ public class UserInfo implements Serializable {
 	private String email;
 
 	//QQ开放ID
+	@JsonIgnore
 	private String qqOpenId;
 
 	//QQ头像
@@ -45,6 +46,7 @@ public class UserInfo implements Serializable {
 	private Date lastLoginTime;
 
 	//状态
+	@JsonIgnore
 	private Integer status;
 
 	//已使用空间
