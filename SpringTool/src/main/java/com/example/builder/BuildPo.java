@@ -31,7 +31,7 @@ public class BuildPo {
             bw.newLine();
             bw.write("import java.io.Serializable;");
             bw.newLine();
-            bw.write(Constants.IGNORE_BEAN_TOJSON_CLASS);
+            bw.write(Constants.IGNORE_BEAN_TOJSON_CLASS + ";");
             bw.newLine();
             if (tableInfo.getHaveDate() || tableInfo.getHaveDateTime()) {
                 bw.write("import java.util.Date;");
