@@ -1,6 +1,7 @@
 package com.example.entity.po;
 
 import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIgnore
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -10,7 +11,7 @@ import lombok.Setter;
 /**
  * @Description: 用户信息表
  * @author: Sly
- * @Date: 2024/07/22
+ * @Date: 2024/07/24
  */
 @Getter
 @Setter
@@ -35,10 +36,12 @@ public class UserInfo implements Serializable {
 
 	//加入时间
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+3")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date joinTime;
 
 	//最后是登录一回
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+3")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date lastLoginTime;
 
 	//状态
