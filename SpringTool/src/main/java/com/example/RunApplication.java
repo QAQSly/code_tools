@@ -2,6 +2,7 @@ package com.example;
 
 
 import com.example.bean.TableInfo;
+import com.example.builder.BuildBase;
 import com.example.builder.BuildPo;
 import com.example.builder.BuildTable;
 
@@ -14,6 +15,8 @@ public class RunApplication {
         for (TableInfo tableInfo : tableInfoList) {
             BuildPo.execute(tableInfo);
         }
+
+        BuildBase.execute();
 
        
     }
