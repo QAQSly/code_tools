@@ -4,6 +4,8 @@ import com.example.bean.Constants;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.net.URL;
+
 import org.slf4j.Logger;
 
 public class BuildBase {
@@ -21,15 +23,12 @@ public class BuildBase {
 
         File javaFile = new File(outPutPath, fileName + ".java");
 
-        String templatePath = BuildBase.class.getClassLoader().getResource("template/" + fileName + ".txt").getPath();
-        logger.info("---outPutPath---{}", outPutPath);
-        logger.info("---file---{}", javaFile.getPath());
-        logger.info("---url---{}" + templatePath);
+        InputStream templateIn = BuildBase.class.getClassLoader().getResourceAsStream("template/" + fileName + ".txt");
 
         try (OutputStream out = new FileOutputStream(javaFile);
              OutputStreamWriter outW = new OutputStreamWriter(out, "utf-8");
              BufferedWriter bw = new BufferedWriter(outW);
-             InputStream in = new FileInputStream(templatePath);
+             InputStream in = templateIn;
              InputStreamReader inR = new InputStreamReader(in, "utf-8");
              BufferedReader br = new BufferedReader(inR);) {
 
