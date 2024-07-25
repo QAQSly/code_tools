@@ -14,6 +14,9 @@ public class BuildBase {
     public static final Logger logger = LoggerFactory.getLogger(BuildBase.class);
     public static void execute() {
         List<String> headList = new ArrayList<>();
+        headList.add("package" + Constants.PACKAGE_ENUMS);
+        build(headList, "DateTimePatternEnum", Constants.PATH_ENUMS);
+        headList.clear();
         headList.add("package " + Constants.PACKAGE_UTILS);
         build(headList, "DateUtil", Constants.PATH_UTILS);
 

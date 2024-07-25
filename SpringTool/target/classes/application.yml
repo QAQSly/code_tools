@@ -30,6 +30,7 @@ package_base: com.example
 package_po: entity.po
 package_param: entity.query
 package_utils: utils
+package_enums: enums
 
 #作者名
 author_comment: "Sly"
