@@ -22,6 +22,9 @@ public class BuildBase {
         File javaFile = new File(outPutPath, fileName + ".java");
 
         String templatePath = BuildBase.class.getClassLoader().getResource("template/" + fileName + ".txt").getPath();
+        logger.info("---outPutPath---{}", outPutPath);
+        logger.info("---file---{}", javaFile.getPath());
+        logger.info("---url---{}" + templatePath);
 
         try (OutputStream out = new FileOutputStream(javaFile);
              OutputStreamWriter outW = new OutputStreamWriter(out, "utf-8");
@@ -38,6 +41,7 @@ public class BuildBase {
                 bw.newLine();
             }
             bw.flush();
+            logger.info("success");
 
         } catch (Exception e) {
             logger.error("生成基础类{}失败", fileName, e);
