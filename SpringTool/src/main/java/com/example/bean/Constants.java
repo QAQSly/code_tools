@@ -13,8 +13,12 @@ public class Constants {
     public static String PATH_BASE;
 
     public static String PATH_PO;
+
+    public static String PATH_UTILS;
     public static String PACKAGE_BASE;
     public static String PACKAGE_PO;
+
+    public static String PACKAGE_UTILS;
 
     // 需要忽略的属性
     public static String IGNORE_BEAN_TOJSON_FIELD;
@@ -48,11 +52,13 @@ public class Constants {
         PACKAGE_BASE = YmlUtils.getString("package_base");
         PACKAGE_PO = YmlUtils.getString("package_po");
         PACKAGE_PO =  PACKAGE_BASE + "." +  PACKAGE_PO;
+        PACKAGE_UTILS = YmlUtils.getString("package_utils");
+        PACKAGE_UTILS = PACKAGE_BASE + "." + PACKAGE_UTILS;
 
         PATH_BASE = YmlUtils.getString("path_base");
-
         PATH_BASE = PATH_BASE  + PATH_JAVA + "/";
         PATH_PO = PATH_BASE + PACKAGE_PO.replace(".", "/");
+        PATH_UTILS = PATH_BASE + PACKAGE_UTILS.replace(".", "/");
 
 
 
@@ -68,8 +74,8 @@ public class Constants {
     public final static String[] SQL_LONG_TYPE = new String[]{"bigint"};
 
     public static void main(String[] args) {
-        System.out.println(PATH_PO);
-        System.out.println(PACKAGE_PO);
+        System.out.println(PATH_UTILS);
+        System.out.println(PACKAGE_UTILS);
     }
 
 }
