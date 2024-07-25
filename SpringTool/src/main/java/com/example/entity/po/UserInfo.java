@@ -13,7 +13,7 @@ import lombok.ToString;
 /**
  * @Description: 用户信息表
  * @author: Sly
- * @Date: 2024/07/24
+ * @Date: 2024/07/25
  */
 @Getter
 @Setter
@@ -60,13 +60,5 @@ public class UserInfo implements Serializable {
 
 	//0: deleted, 1: normal
 	private Integer isDel;
-
-	public static void main(String[] args) {
-		UserInfo userInfo = new UserInfo();
-		userInfo.setUserId("2015672764");
-		userInfo.setEmail("2015672764@qq.com");
-		userInfo.setJoinTime(new Date());
-		System.out.println(userInfo);
-	}
 
 }
