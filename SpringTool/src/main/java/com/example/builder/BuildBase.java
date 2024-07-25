@@ -14,7 +14,7 @@ public class BuildBase {
     public static final Logger logger = LoggerFactory.getLogger(BuildBase.class);
     public static void execute() {
         List<String> headList = new ArrayList<>();
-        headList.add("package" + Constants.PACKAGE_UTILS);
+        headList.add("package " + Constants.PACKAGE_UTILS);
         build(headList, "DateUtil", Constants.PATH_UTILS);
 
     }
