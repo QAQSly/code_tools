@@ -1,8 +1,10 @@
 package com.example.builder;
 
 import com.example.bean.Constants;
+import com.example.bean.FieldInfo;
 import com.example.utils.DateUtils;
 import com.example.utils.YmlUtils;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.BufferedWriter;
 import java.text.SimpleDateFormat;
@@ -21,11 +23,15 @@ public class BuildComment {
         bw.write(" */");
     }
 
-    public static void createFieldComment(BufferedWriter bw, String comment) throws Exception {
-        bw.write("\t//" + (comment == null ? "" : comment));
+    public static void createFieldComment(BufferedWriter bw, FieldInfo fieldInfo) throws Exception {
+        bw.write("\t//" + (fieldInfo.getComment() == null ? "" : fieldInfo.getComment()));
         bw.newLine();
-        bw.write("\t" + String.format("@ToString.Include(name = \"%s\")", comment));
-        bw.newLine();
+        if (!ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, fieldInfo.getSqlType()) ||
+        !ArrayUtils.contains(Constants.SQL_DATE_TYPES, fieldInfo.getSqlType())) {
+            bw.write("\t" + String.format("@ToString.Include(name = \"%s\")", fieldInfo.getComment()));
+            bw.newLine();
+        }
+
 
     }
 
