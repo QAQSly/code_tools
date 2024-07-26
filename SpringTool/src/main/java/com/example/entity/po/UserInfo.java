@@ -1,6 +1,9 @@
 package com.example.entity.po;
 
 import java.io.Serializable;
+
+import com.example.enums.DateTimePatternEnum;
+import com.example.utils.DateUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -60,5 +63,15 @@ public class UserInfo implements Serializable {
 
 	//0: deleted, 1: normal
 	private Integer isDel;
+
+
+
+
+	public static void main(String[] args) {
+		UserInfo userInfo = new UserInfo();
+		userInfo.setJoinTime(new Date());
+		userInfo.setLastLoginTime(new Date());
+		System.out.println(userInfo);
+	}
 
 }

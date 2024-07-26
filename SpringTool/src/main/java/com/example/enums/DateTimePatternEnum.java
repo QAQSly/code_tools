@@ -1,4 +1,4 @@
-packagecom.example.enums;
+package com.example.enums;
 
 public enum DateTimePatternEnum {
     YYYY_MM_DD_HH_MM_SS("yyyy-MM-dd HH:mm:ss"),

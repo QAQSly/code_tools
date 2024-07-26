@@ -51,6 +51,10 @@ public class BuildPo {
                 bw.newLine();
                 bw.write(Constants.BEAN_DATE_UNFORMAT_CLASS + ";");
                 bw.newLine();
+                bw.write("import com.example.utils.DateUtil;");
+                bw.newLine();
+                bw.write("import com.example.enums.DateTimePatternEnum;");
+                bw.newLine();
             }
             if (tableInfo.getHavaBigDecimal()) {
                 bw.write("import java.math.BigDecimal;");
@@ -69,13 +73,23 @@ public class BuildPo {
             bw.write("public class " + tableInfo.getBeanName() + " implements Serializable {");
             bw.newLine();
 
+
+
             for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
+                String dateTimeFormatMethod = null;
+                String dateFormatMethod = null;
                 BuildComment.createFieldComment(bw, fieldInfo.getComment());
                 if (ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, fieldInfo.getSqlType())) {
                     bw.write("\t" + String.format(Constants.BEAN_DATE_FORMAT_EXPRESSION, DateUtils.YYYY_MM_DD_HH_MM_SS));
                     bw.newLine();
                     bw.write("\t" + String.format(Constants.BEAN_DATE_UNFORMAT_EXPRESSION, DateUtils.YYYY_MM_DD_HH_MM_SS));
                     bw.newLine();
+                    dateTimeFormatMethod = "\t" + String.format("@ToString.Include()\n" +
+                            "\tpublic String %s() {\n" +
+                            "\t\treturn DateUtil.format(%s, DateTimePatternEnum.YYYY_MM_DD_HH_MM_SS.getPattern());\n" +
+                            "\t}", fieldInfo.getPropertyName(), fieldInfo.getPropertyName());
+
+
                 }
                 if (ArrayUtils.contains(Constants.SQL_DATE_TYPES, fieldInfo.getSqlType())) {
                     bw.write("\t" + String.format(Constants.BEAN_DATE_FORMAT_EXPRESSION, DateUtils.YYYY_MM_DD));
@@ -91,6 +105,9 @@ public class BuildPo {
                 bw.write("\tprivate " + fieldInfo.getJavaType() + " " + fieldInfo.getPropertyName() + ";");
                 bw.newLine();
                 bw.newLine();
+                if (dateTimeFormatMethod != null) {
+                    bw.write(dateTimeFormatMethod);
+                }
             }
 
             bw.write("}");
