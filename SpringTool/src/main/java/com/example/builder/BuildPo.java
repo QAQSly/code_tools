@@ -84,10 +84,10 @@ public class BuildPo {
                     bw.newLine();
                     bw.write("\t" + String.format(Constants.BEAN_DATE_UNFORMAT_EXPRESSION, DateUtils.YYYY_MM_DD_HH_MM_SS));
                     bw.newLine();
-                    dateTimeFormatMethod = "\t" + String.format("@ToString.Include(name=\"%s\")\n" +
+                    dateTimeFormatMethod = "\t" + String.format("@ToString.Include(name = \"%s\")\n" +
                             "\tpublic String %s() {\n" +
                             "\t\treturn DateUtil.format(%s, DateTimePatternEnum.YYYY_MM_DD_HH_MM_SS.getPattern());\n" +
-                            "\t}",fieldInfo.getComment(), fieldInfo.getPropertyName(), fieldInfo.getPropertyName());
+                            "\t}\n",fieldInfo.getComment(), fieldInfo.getPropertyName(), fieldInfo.getPropertyName());
 
 
                 }
@@ -107,6 +107,7 @@ public class BuildPo {
                 bw.newLine();
                 if (dateTimeFormatMethod != null) {
                     bw.write(dateTimeFormatMethod);
+                    dateTimeFormatMethod = null;
                 }
             }
 

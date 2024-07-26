@@ -55,7 +55,8 @@ public class UserInfo implements Serializable {
 	@ToString.Include(name="加入时间")
 	public String joinTime() {
 		return DateUtil.format(joinTime, DateTimePatternEnum.YYYY_MM_DD_HH_MM_SS.getPattern());
-	}	//最后是登录一回
+	}    //最后是登录一回
+
 	@ToString.Include(name = "最后是登录一回")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+3")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -64,7 +65,8 @@ public class UserInfo implements Serializable {
 	@ToString.Include(name="最后是登录一回")
 	public String lastLoginTime() {
 		return DateUtil.format(lastLoginTime, DateTimePatternEnum.YYYY_MM_DD_HH_MM_SS.getPattern());
-	}	//状态
+	}    //状态
+
 	@ToString.Include(name = "状态")
 	@JsonIgnore
 	private Integer status;
@@ -80,5 +82,12 @@ public class UserInfo implements Serializable {
 	//0: deleted, 1: normal
 	@ToString.Include(name = "0: deleted, 1: normal")
 	private Integer isDel;
+
+	public static void main(String[] args) {
+		UserInfo userInfo = new UserInfo();
+		userInfo.setJoinTime(new Date());
+		userInfo.setLastLoginTime(new Date());
+		System.out.println(userInfo);
+	}
 
 }
