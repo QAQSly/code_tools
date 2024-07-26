@@ -26,11 +26,12 @@ public class BuildComment {
     public static void createFieldComment(BufferedWriter bw, FieldInfo fieldInfo) throws Exception {
         bw.write("\t//" + (fieldInfo.getComment() == null ? "" : fieldInfo.getComment()));
         bw.newLine();
-        if (!ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, fieldInfo.getSqlType()) ||
-        !ArrayUtils.contains(Constants.SQL_DATE_TYPES, fieldInfo.getSqlType())) {
-            bw.write("\t" + String.format("@ToString.Include(name = \"%s\")", fieldInfo.getComment()));
-            bw.newLine();
+        if (ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, fieldInfo.getSqlType()) ||
+        ArrayUtils.contains(Constants.SQL_DATE_TYPES, fieldInfo.getSqlType())) {
+            return;
         }
+        bw.write("\t" + String.format("@ToString.Include(name = \"%s\")", fieldInfo.getComment()));
+        bw.newLine();
 
 
     }
