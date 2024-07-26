@@ -28,6 +28,7 @@ public class BuildComment {
         bw.newLine();
         if (ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, fieldInfo.getSqlType()) ||
         ArrayUtils.contains(Constants.SQL_DATE_TYPES, fieldInfo.getSqlType())) {
+            bw.write("\t" + String.format("@ToString.Exclude()", fieldInfo.getComment()));
             return;
         }
         bw.write("\t" + String.format("@ToString.Include(name = \"%s\")", fieldInfo.getComment()));
