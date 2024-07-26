@@ -47,7 +47,8 @@ public class UserInfo implements Serializable {
 	private String password;
 
 	//加入时间
-	@ToString.Exclude()	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+3")
+	@ToString.Exclude()
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+3")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date joinTime;
 
@@ -57,7 +58,8 @@ public class UserInfo implements Serializable {
 	}
 
 	//最后是登录一回
-	@ToString.Exclude()	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+3")
+	@ToString.Exclude()
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+3")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date lastLoginTime;
 
