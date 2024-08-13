@@ -15,7 +15,7 @@ import lombok.ToString;
 /**
  * @Description: 用户信息表
  * @author: Sly
- * @Date: 2024/07/26
+ * @Date: 2024/08/13
  */
 @Getter
 @Setter
@@ -84,14 +84,5 @@ public class UserInfo implements Serializable {
 	//0: deleted, 1: normal
 	@ToString.Include(name = "0: deleted, 1: normal")
 	private Integer isDel;
-
-
-	public static void main(String[] args) {
-		UserInfo u = new UserInfo();
-		u.setJoinTime(new Date());
-		u.setLastLoginTime(new Date());
-		System.out.println(u);
-	}
-
 
 }

@@ -14,3 +14,4 @@ com/example/bean/Constants.class
 com/example/entity/po/UserInfo.class
 com/example/utils/JsonUtils.class
 com/example/builder/BuildPo.class
+com/example/builder/BuildQuery.class
