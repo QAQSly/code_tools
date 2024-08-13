@@ -55,7 +55,7 @@ public class BuildQuery {
 
 
             for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
-                BuildComment.createFieldComment(bw, fieldInfo);
+                BuildComment.createFieldComment(bw, fieldInfo, false);
 
                 bw.write("\tprivate " + fieldInfo.getJavaType() + " " + fieldInfo.getPropertyName() + ";");
                 bw.newLine();

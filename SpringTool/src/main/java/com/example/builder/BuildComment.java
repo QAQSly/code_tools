@@ -23,19 +23,24 @@ public class BuildComment {
         bw.write(" */");
     }
 
-    public static void createFieldComment(BufferedWriter bw, FieldInfo fieldInfo) throws Exception {
+    public static void createFieldComment(BufferedWriter bw, FieldInfo fieldInfo, Boolean isToString) throws Exception {
         bw.write("\t//" + (fieldInfo.getComment() == null ? "" : fieldInfo.getComment()));
         bw.newLine();
-        if (ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, fieldInfo.getSqlType()) ||
-        ArrayUtils.contains(Constants.SQL_DATE_TYPES, fieldInfo.getSqlType())) {
-            bw.write("\t" + String.format("@ToString.Exclude()\n", fieldInfo.getComment()));
-            return;
+        if (isToString) {
+            if (ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, fieldInfo.getSqlType()) ||
+                    ArrayUtils.contains(Constants.SQL_DATE_TYPES, fieldInfo.getSqlType())) {
+                bw.write("\t" + String.format("@ToString.Exclude()\n", fieldInfo.getComment()));
+                return;
+            }
+            bw.write("\t" + String.format("@ToString.Include(name = \"%s\")", fieldInfo.getComment()));
+            bw.newLine();
         }
-        bw.write("\t" + String.format("@ToString.Include(name = \"%s\")", fieldInfo.getComment()));
-        bw.newLine();
+
 
 
     }
+
+
 
 
     public static void createMethodComment() {

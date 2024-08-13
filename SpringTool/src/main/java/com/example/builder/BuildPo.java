@@ -78,7 +78,7 @@ public class BuildPo {
             for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
                 String dateTimeFormatMethod = null;
                 String dateFormatMethod = null;
-                BuildComment.createFieldComment(bw, fieldInfo);
+                BuildComment.createFieldComment(bw, fieldInfo, true);
                 if (ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, fieldInfo.getSqlType())) {
                     bw.write("\t" + String.format(Constants.BEAN_DATE_FORMAT_EXPRESSION, DateUtils.YYYY_MM_DD_HH_MM_SS));
                     bw.newLine();
