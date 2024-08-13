@@ -85,4 +85,13 @@ public class UserInfo implements Serializable {
 	@ToString.Include(name = "0: deleted, 1: normal")
 	private Integer isDel;
 
+
+	public static void main(String[] args) {
+		UserInfo u = new UserInfo();
+		u.setJoinTime(new Date());
+		u.setLastLoginTime(new Date());
+		System.out.println(u);
+	}
+
+
 }

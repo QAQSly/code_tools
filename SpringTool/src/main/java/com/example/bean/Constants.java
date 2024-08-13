@@ -5,7 +5,7 @@ import com.example.utils.YmlUtils;
 public class Constants {
     public static Boolean IGNORE_TABLE_PREFIX;
 
-    public static String SUFFIX_BEAN_PARAM;
+    public static String SUFFIX_BEAN_QUERY;
 
     public static String PATH_JAVA = "java";
 
@@ -23,6 +23,10 @@ public class Constants {
     public static String PACKAGE_UTILS;
 
     public static String PACKAGE_ENUMS;
+
+    public static String PACKAGE_QUERY;
+
+    public static String PATH_QUERY;
 
     // 需要忽略的属性
     public static String IGNORE_BEAN_TOJSON_FIELD;
@@ -52,7 +56,7 @@ public class Constants {
 
 
         IGNORE_TABLE_PREFIX = Boolean.valueOf(YmlUtils.getString("ignore.table.prefix"));
-        SUFFIX_BEAN_PARAM = YmlUtils.getString("suffix_bean_param");
+        SUFFIX_BEAN_QUERY = YmlUtils.getString("suffix_bean_query");
         PACKAGE_BASE = YmlUtils.getString("package_base");
         PACKAGE_PO = YmlUtils.getString("package_po");
         PACKAGE_PO =  PACKAGE_BASE + "." +  PACKAGE_PO;
@@ -61,11 +65,16 @@ public class Constants {
         PACKAGE_ENUMS = YmlUtils.getString("package_enums");
         PACKAGE_ENUMS = PACKAGE_BASE + "." + PACKAGE_ENUMS;
 
+        PACKAGE_QUERY = YmlUtils.getString("package_query");
+        PACKAGE_QUERY = PACKAGE_BASE + "." + PACKAGE_QUERY;
+
         PATH_BASE = YmlUtils.getString("path_base");
         PATH_BASE = PATH_BASE  + PATH_JAVA + "/";
         PATH_PO = PATH_BASE + PACKAGE_PO.replace(".", "/");
         PATH_UTILS = PATH_BASE + PACKAGE_UTILS.replace(".", "/");
         PATH_ENUMS = PATH_BASE + PACKAGE_ENUMS.replace(".", "/");
+        PATH_QUERY = PATH_BASE + PACKAGE_QUERY.replace(".", "/");
+
 
 
 
@@ -81,8 +90,8 @@ public class Constants {
     public final static String[] SQL_LONG_TYPE = new String[]{"bigint"};
 
     public static void main(String[] args) {
-        System.out.println(PATH_ENUMS);
-        System.out.println(PACKAGE_ENUMS);
+        System.out.println(PATH_QUERY);
+        System.out.println(PACKAGE_QUERY);
     }
 
 }

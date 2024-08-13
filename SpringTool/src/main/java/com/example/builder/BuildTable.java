@@ -112,7 +112,7 @@ public class BuildTable {
                 beanName = processField(beanName, true);
                 tableInfo.setBeanName(beanName);
 
-                tableInfo.setBeanParamName(beanName + Constants.SUFFIX_BEAN_PARAM);
+                tableInfo.setBeanParamName(beanName + Constants.SUFFIX_BEAN_QUERY);
                 getFields(tableInfo);
                 getKeyIndex(tableInfo);
                 tableInfoList.add(tableInfo);
