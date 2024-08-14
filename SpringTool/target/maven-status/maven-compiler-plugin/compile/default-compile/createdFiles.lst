@@ -11,7 +11,6 @@ com/example/builder/BuildBase.class
 com/example/enums/DateTimePatternEnum.class
 com/example/utils/StringUtils.class
 com/example/bean/Constants.class
-com/example/entity/query/UserInfoQuery.class
 com/example/entity/po/UserInfo.class
 com/example/utils/JsonUtils.class
 com/example/builder/BuildPo.class
