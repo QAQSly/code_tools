@@ -22,6 +22,13 @@ bean_date_unFormat_class: import org.springframework.format.annotation.DateTimeF
 # 参数bean后缀
 suffix_bean_query : Query
 
+# 参数模糊搜索后缀
+suffix_bean_query_fuzzy : Fuzzy
+
+# 参数时间起始与结束
+suffix_bean_query_start : Start
+suffix_bean_query_end : End
+
 # 文件输出路径
 path_base: /root/code_tools/SpringTool/src/main/
 

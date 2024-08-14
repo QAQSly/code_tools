@@ -3,6 +3,13 @@ package com.example.bean;
 import com.example.utils.YmlUtils;
 
 public class Constants {
+
+    // 参数常数
+    public static String SUFFIX_BEAN_QUERY_FUZZY;
+
+    public static String SUFFIX_BEAN_QUERY_START;
+    public static String SUFFIX_BEAN_QUERY_END;
+
     public static Boolean IGNORE_TABLE_PREFIX;
 
     public static String SUFFIX_BEAN_QUERY;
@@ -56,7 +63,12 @@ public class Constants {
 
 
         IGNORE_TABLE_PREFIX = Boolean.valueOf(YmlUtils.getString("ignore.table.prefix"));
+
         SUFFIX_BEAN_QUERY = YmlUtils.getString("suffix_bean_query");
+        SUFFIX_BEAN_QUERY_FUZZY = YmlUtils.getString("suffix_bean_query_fuzzy");
+        SUFFIX_BEAN_QUERY_START = YmlUtils.getString("suffix_bean_query_start");
+        SUFFIX_BEAN_QUERY_END = YmlUtils.getString("suffix_bean_query_end");
+
         PACKAGE_BASE = YmlUtils.getString("package_base");
         PACKAGE_PO = YmlUtils.getString("package_po");
         PACKAGE_PO =  PACKAGE_BASE + "." +  PACKAGE_PO;
@@ -74,6 +86,7 @@ public class Constants {
         PATH_UTILS = PATH_BASE + PACKAGE_UTILS.replace(".", "/");
         PATH_ENUMS = PATH_BASE + PACKAGE_ENUMS.replace(".", "/");
         PATH_QUERY = PATH_BASE + PACKAGE_QUERY.replace(".", "/");
+
 
 
 
