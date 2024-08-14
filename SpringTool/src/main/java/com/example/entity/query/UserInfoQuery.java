@@ -18,25 +18,45 @@ public class UserInfoQuery {
 	//用户ID
 	private String userId;
 
+	private String userId;
+
 	//用户昵称
+	private String nickName;
+
 	private String nickName;
 
 	//邮箱
 	private String email;
 
+	private String email;
+
 	//QQ开放ID
+	private String qqOpenId;
+
 	private String qqOpenId;
 
 	//QQ头像
 	private String qqAvatar;
 
+	private String qqAvatar;
+
 	//密码
+	private String password;
+
 	private String password;
 
 	//加入时间
 	private Date joinTime;
 
+	private Date joinTime;
+
+	private Date joinTime;
+
 	//最后是登录一回
+	private Date lastLoginTime;
+
+	private Date lastLoginTime;
+
 	private Date lastLoginTime;
 
 	//状态
