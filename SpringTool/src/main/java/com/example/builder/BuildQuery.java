@@ -66,7 +66,7 @@ public class BuildQuery {
 
                 if (ArrayUtils.contains(Constants.SQL_STRING_TYPE, fieldInfo.getSqlType())) {
                     String propertyName = fieldInfo.getPropertyName() + Constants.SUFFIX_BEAN_QUERY_FUZZY;
-                    bw.write("\tprivate " + fieldInfo.getJavaType() + " " + fieldInfo.getPropertyName() + ";");
+                    bw.write("\tprivate " + fieldInfo.getJavaType() + " " + propertyName + ";");
                     bw.newLine();
                     bw.newLine();
 
@@ -80,11 +80,11 @@ public class BuildQuery {
                     ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, fieldInfo.getSqlType())) {
                     String propertyStartName = fieldInfo.getPropertyName() +  Constants.SUFFIX_BEAN_QUERY_START;
                     String propertyEndName = fieldInfo.getPropertyName() + Constants.SUFFIX_BEAN_QUERY_END;
-                    bw.write("\tprivate " + fieldInfo.getJavaType() + " " + fieldInfo.getPropertyName() + ";");
+                    bw.write("\tprivate " + fieldInfo.getJavaType() + " " + propertyStartName + ";");
                     bw.newLine();
                     bw.newLine();
 
-                    bw.write("\tprivate " + fieldInfo.getJavaType() + " " + fieldInfo.getPropertyName() + ";");
+                    bw.write("\tprivate " + fieldInfo.getJavaType() + " " + propertyEndName + ";");
                     bw.newLine();
                     bw.newLine();
 
