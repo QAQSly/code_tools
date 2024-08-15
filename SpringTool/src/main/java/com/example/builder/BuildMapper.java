@@ -63,8 +63,7 @@ public class BuildMapper {
                         methodName.append("And");
                     }
                 }
-                bw.write("\t T selectBy" + methodName + "() {");
-                bw.write("}");
+                bw.write("\t T selectBy" + methodName + "();");
                 bw.newLine();
             }
 

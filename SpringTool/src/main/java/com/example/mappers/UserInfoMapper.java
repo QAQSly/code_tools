@@ -6,9 +6,9 @@ package com.example.mappers;
  * @Date: 2024/08/15
  */
 public interface UserInfoMapper extends BaseMapper {
-	 T selectByUserId() {}
-	 T selectByEmail() {}
-	 T selectByQqOpenId() {}
-	 T selectByNickName() {}
-	 T selectByEmail() {}
+	 T selectByUserId();
+	 T selectByEmail();
+	 T selectByQqOpenId();
+	 T selectByNickName();
+	 T selectByEmail();
 }
