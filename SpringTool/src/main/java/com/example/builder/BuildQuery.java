@@ -46,7 +46,7 @@ public class BuildQuery {
             bw.newLine();
 
             //  comment
-            BuildComment.createClassComment(bw, tableInfo.getComment());
+            BuildComment.createClassComment(bw, tableInfo.getComment() + "查询对象");
             bw.newLine();
             // get set
             bw.write("@Getter\n" + "@Setter\n" + "@ToString");

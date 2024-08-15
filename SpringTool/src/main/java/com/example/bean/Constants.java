@@ -14,6 +14,9 @@ public class Constants {
 
     public static String SUFFIX_BEAN_QUERY;
 
+    // suffix mapper
+    public static String SUFFIX_MAPPERS;
+
     public static String PATH_JAVA = "java";
 
     public static String PATH_RESOURCES = "resources";
@@ -24,6 +27,10 @@ public class Constants {
     public static String PATH_UTILS;
 
     public static String PATH_ENUMS;
+
+    // mapper path
+    public static String PACKAGE_MAPPERS;
+    public static String PATH_MAPPERS;
     public static String PACKAGE_BASE;
     public static String PACKAGE_PO;
 
@@ -69,6 +76,9 @@ public class Constants {
         SUFFIX_BEAN_QUERY_START = YmlUtils.getString("suffix_bean_query_start");
         SUFFIX_BEAN_QUERY_END = YmlUtils.getString("suffix_bean_query_end");
 
+        // mapper
+        SUFFIX_MAPPERS = YmlUtils.getString("suffix_mappers");
+
         PACKAGE_BASE = YmlUtils.getString("package_base");
         PACKAGE_PO = YmlUtils.getString("package_po");
         PACKAGE_PO =  PACKAGE_BASE + "." +  PACKAGE_PO;
@@ -80,12 +90,19 @@ public class Constants {
         PACKAGE_QUERY = YmlUtils.getString("package_query");
         PACKAGE_QUERY = PACKAGE_BASE + "." + PACKAGE_QUERY;
 
+        // mapper package
+        PACKAGE_MAPPERS = YmlUtils.getString("package_mappers");
+        PACKAGE_MAPPERS = PACKAGE_BASE + "." + PACKAGE_MAPPERS;
+
         PATH_BASE = YmlUtils.getString("path_base");
         PATH_BASE = PATH_BASE  + PATH_JAVA + "/";
         PATH_PO = PATH_BASE + PACKAGE_PO.replace(".", "/");
         PATH_UTILS = PATH_BASE + PACKAGE_UTILS.replace(".", "/");
         PATH_ENUMS = PATH_BASE + PACKAGE_ENUMS.replace(".", "/");
         PATH_QUERY = PATH_BASE + PACKAGE_QUERY.replace(".", "/");
+
+        // mapper path
+        PATH_MAPPERS = PATH_BASE + PACKAGE_MAPPERS.replace(".", "/");
 
 
 
@@ -103,8 +120,8 @@ public class Constants {
     public final static String[] SQL_LONG_TYPE = new String[]{"bigint"};
 
     public static void main(String[] args) {
-        System.out.println(PATH_QUERY);
-        System.out.println(PACKAGE_QUERY);
+        System.out.println(PATH_MAPPERS);
+        System.out.println(PACKAGE_MAPPERS);
     }
 
 }
