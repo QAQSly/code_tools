@@ -7,9 +7,9 @@ import lombok.ToString;
 
 
 /**
- * @Description: 用户信息表
+ * @Description: 用户信息表查询对象
  * @author: Sly
- * @Date: 2024/08/14
+ * @Date: 2024/08/15
  */
 @Getter
 @Setter

@@ -1,7 +1,7 @@
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
-interface BaseMapper<T, P> {
+public interface BaseMapper<T, P> {
     // insert
     Integer insert(@Param("bean") T t);
 

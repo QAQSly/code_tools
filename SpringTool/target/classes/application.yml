@@ -29,6 +29,9 @@ suffix_bean_query_fuzzy : Fuzzy
 suffix_bean_query_start : Start
 suffix_bean_query_end : End
 
+# mapper后缀
+suffix_mappers : Mapper
+
 # 文件输出路径
 path_base: /root/code_tools/SpringTool/src/main/
 
@@ -38,7 +41,7 @@ package_po: entity.po
 package_query: entity.query
 package_utils: utils
 package_enums: enums
-package_mapper: mapper
+package_mapper: mappers
 
 #作者名
 author_comment: "Sly"
