@@ -36,7 +36,7 @@ public class BuildMapper {
             bw.newLine();
 
             //  comment
-            BuildComment.createClassComment(bw, tableInfo.getComment());
+            BuildComment.createClassComment(bw, tableInfo.getComment() + "Mapper");
             bw.newLine();
             // get set
             bw.write("@Getter\n" + "@Setter\n" + "@ToString");
