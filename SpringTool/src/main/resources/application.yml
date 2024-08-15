@@ -41,7 +41,7 @@ package_po: entity.po
 package_query: entity.query
 package_utils: utils
 package_enums: enums
-package_mapper: mappers
+package_mappers: mappers
 
 #作者名
 author_comment: "Sly"

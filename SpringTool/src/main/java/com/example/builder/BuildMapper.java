@@ -4,11 +4,14 @@ import com.example.bean.Constants;
 import com.example.bean.FieldInfo;
 import com.example.bean.TableInfo;
 import com.example.utils.DateUtils;
+import com.example.utils.StringUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.util.List;
 
 import java.io.*;
+import java.util.Map;
 
 public class BuildMapper {
 
@@ -39,10 +42,31 @@ public class BuildMapper {
             BuildComment.createClassComment(bw, tableInfo.getComment() + "Mapper");
             bw.newLine();
             // get set
-            bw.write("@Getter\n" + "@Setter\n" + "@ToString");
-            bw.newLine();
+            // bw.write("@Getter\n" + "@Setter\n" + "@ToString");
+            //bw.newLine();
             bw.write("public interface " + className + " extends BaseMapper {");
             bw.newLine();
+
+            // 根据索引创建
+            Map<String, List<FieldInfo>> keyIndexMaps = tableInfo.getKeyIndexMap();
+
+
+            for (Map.Entry<String, List<FieldInfo>> entry : keyIndexMaps.entrySet()) {
+                List<FieldInfo> keyFieldInfoList = entry.getValue();
+                Integer index = 0;
+                StringBuilder methodName = new StringBuilder();
+
+                for (FieldInfo fieldInfo : keyFieldInfoList) {
+                    index++;
+                    methodName.append(StringUtils.upperCaseFirstLetter(fieldInfo.getPropertyName()));
+                    if (index < keyFieldInfoList.size()) {
+                        methodName.append("And");
+                    }
+                }
+                bw.write("\t T selectBy" + methodName + "() {");
+                bw.write("}");
+                bw.newLine();
+            }
 
             bw.write("}");
             bw.flush();
