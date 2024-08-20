@@ -28,6 +28,9 @@ public class Constants {
 
     public static String PATH_ENUMS;
 
+    // xml
+    public static String PATH_MAPPER_XMLS;
+
     // mapper path
     public static String PACKAGE_MAPPERS;
     public static String PATH_MAPPERS;
@@ -103,8 +106,8 @@ public class Constants {
 
         // mapper path
         PATH_MAPPERS = PATH_BASE + PACKAGE_MAPPERS.replace(".", "/");
-
-
+        // xml path
+        PATH_MAPPER_XMLS = YmlUtils.getString("path_base") + PATH_RESOURCES +  "/" + PACKAGE_MAPPERS.replace(".", "/");
 
 
 
@@ -120,8 +123,7 @@ public class Constants {
     public final static String[] SQL_LONG_TYPE = new String[]{"bigint"};
 
     public static void main(String[] args) {
-        System.out.println(PATH_MAPPERS);
-        System.out.println(PACKAGE_MAPPERS);
+        System.out.println(PATH_MAPPER_XMLS);
     }
 
 }
