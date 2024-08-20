@@ -23,7 +23,7 @@ public class BuildBase {
         // 生成Mapper
         headList.clear();
         headList.add("package " + Constants.PACKAGE_MAPPERS);
-        build(headList, "BaseMapper<T, P>", Constants.PATH_MAPPERS);
+        build(headList, "BaseMapper", Constants.PATH_MAPPERS);
 
     }
 
