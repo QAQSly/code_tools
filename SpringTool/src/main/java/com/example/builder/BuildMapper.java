@@ -65,6 +65,7 @@ public class BuildMapper {
                     }
                 }
                 bw.newLine();
+                BuildComment.createFieldComment(bw, "根据" + methodName + "查询");
                 bw.write("\t T selectBy" + methodName + "();");
                 bw.newLine();
             }

@@ -36,10 +36,12 @@ public class BuildComment {
             bw.newLine();
         }
 
-
-
     }
 
+    public static void createFieldComment(BufferedWriter bw, String comment) throws Exception {
+        bw.write("\t//" + comment);
+        bw.newLine();
+    }
 
 
 
