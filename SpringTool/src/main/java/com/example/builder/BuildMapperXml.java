@@ -30,8 +30,17 @@ public class BuildMapperXml {
              OutputStreamWriter outW = new OutputStreamWriter(out, "utf-8");
              BufferedWriter bw = new BufferedWriter(outW)) {
             // content
+            bw.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+            bw.newLine();
+            bw.write("<!DOCTYPE mapper PUBLIC \"-//mybatis.org// DTD Mapper 3.0//EN\"");
+            bw.newLine();
+            bw.write("\t\"http://mybatis.org/dtd/mybatis-3-mapper.dtd\">");
+            bw.newLine();
+            bw.write("<mapper namespace=\"com.example.mappers.UserInfoMapper\">");
+            bw.newLine();
+            bw.write("</mapper>");
 
-             bw.flush();
+            bw.flush();
         } catch (Exception e) {
             logger.error("创建Mapper Xml失败");
             e.printStackTrace();
