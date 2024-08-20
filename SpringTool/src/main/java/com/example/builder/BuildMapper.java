@@ -37,6 +37,9 @@ public class BuildMapper {
             bw.write("package " + Constants.PACKAGE_MAPPERS + ";");
             bw.newLine();
             bw.newLine();
+            bw.write("import org.apache.ibatis.annotations.Param;");
+            bw.newLine();
+            bw.newLine();
 
             //  comment
             BuildComment.createClassComment(bw, tableInfo.getComment() + "Mapper");
@@ -55,6 +58,7 @@ public class BuildMapper {
                 List<FieldInfo> keyFieldInfoList = entry.getValue();
                 Integer index = 0;
                 StringBuilder methodName = new StringBuilder();
+                StringBuilder methodParam = new StringBuilder();
 
                 for (FieldInfo fieldInfo : keyFieldInfoList) {
                     logger.info("索引大小---" + keyFieldInfoList.size());
@@ -63,10 +67,26 @@ public class BuildMapper {
                     if (index < keyFieldInfoList.size()) {
                         methodName.append("And");
                     }
+
+                    methodParam.append("@Param(\"" + fieldInfo.getPropertyName() + "\") " +
+                            fieldInfo.getJavaType() + " " + fieldInfo.getPropertyName());
+                    if (index < keyFieldInfoList.size()) {
+                        methodName.append(",");
+                    }
                 }
                 bw.newLine();
                 BuildComment.createFieldComment(bw, "根据" + methodName + "查询");
-                bw.write("\t T selectBy" + methodName + "();");
+                bw.write("\t T selectBy" + methodName + "(" + methodParam + ");");
+                bw.newLine();
+
+                bw.newLine();
+                BuildComment.createFieldComment(bw, "根据" + methodName + "更新");
+                bw.write("\t T updateBy" + methodName + "(" + methodParam + ");");
+                bw.newLine();
+
+                bw.newLine();
+                BuildComment.createFieldComment(bw, "根据" + methodName + "删除");
+                bw.write("\t T deleteBy" + methodName + "(" + methodParam + ");");
                 bw.newLine();
             }
 
