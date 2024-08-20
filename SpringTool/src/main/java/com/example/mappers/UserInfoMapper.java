@@ -7,11 +7,15 @@ package com.example.mappers;
  */
 public interface UserInfoMapper<T, P> extends BaseMapper {
 
+	//根据UserId查询
 	 T selectByUserId();
 
+	//根据Email查询
 	 T selectByEmail();
 
+	//根据QqOpenId查询
 	 T selectByQqOpenId();
 
+	//根据NickName查询
 	 T selectByNickName();
 }
