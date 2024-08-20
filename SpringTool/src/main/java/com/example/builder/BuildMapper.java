@@ -61,7 +61,6 @@ public class BuildMapper {
                 StringBuilder methodParam = new StringBuilder();
 
                 for (FieldInfo fieldInfo : keyFieldInfoList) {
-                    logger.info("索引大小---" + keyFieldInfoList.size());
                     index++;
                     methodName.append(StringUtils.upperCaseFirstLetter(fieldInfo.getPropertyName()));
                     if (index < keyFieldInfoList.size()) {
