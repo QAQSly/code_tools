@@ -44,7 +44,7 @@ public class BuildMapper {
             // get set
             // bw.write("@Getter\n" + "@Setter\n" + "@ToString");
             //bw.newLine();
-            bw.write("public interface " + className + " extends BaseMapper {");
+            bw.write("public interface " + className + "<T, P> extends BaseMapper {");
             bw.newLine();
 
             // 根据索引创建
