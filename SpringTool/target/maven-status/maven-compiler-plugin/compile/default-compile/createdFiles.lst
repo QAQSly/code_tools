@@ -5,6 +5,7 @@ com/example/builder/BuildComment.class
 com/example/utils/DateUtils.class
 com/example/utils/YmlUtils.class
 com/example/builder/BuildBase.class
+com/example/builder/BuildMapperXml.class
 com/example/enums/DateTimePatternEnum.class
 com/example/utils/StringUtils.class
 com/example/mappers/UserInfoMapper.class

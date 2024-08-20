@@ -13,7 +13,7 @@ public interface UserInfoMapper<T, P> extends BaseMapper {
 	 T selectByUserId(@Param("userId") String userId);
 
 	//根据UserId更新
-	 T updateByUserId(@Param("userId") String userId);
+	 T updateByUserId(@Param("bean") T t, @Param("userId") String userId);
 
 	//根据UserId删除
 	 T deleteByUserId(@Param("userId") String userId);
@@ -22,7 +22,7 @@ public interface UserInfoMapper<T, P> extends BaseMapper {
 	 T selectByEmail(@Param("email") String email);
 
 	//根据Email更新
-	 T updateByEmail(@Param("email") String email);
+	 T updateByEmail(@Param("bean") T t, @Param("email") String email);
 
 	//根据Email删除
 	 T deleteByEmail(@Param("email") String email);
@@ -31,7 +31,7 @@ public interface UserInfoMapper<T, P> extends BaseMapper {
 	 T selectByQqOpenId(@Param("qqOpenId") String qqOpenId);
 
 	//根据QqOpenId更新
-	 T updateByQqOpenId(@Param("qqOpenId") String qqOpenId);
+	 T updateByQqOpenId(@Param("bean") T t, @Param("qqOpenId") String qqOpenId);
 
 	//根据QqOpenId删除
 	 T deleteByQqOpenId(@Param("qqOpenId") String qqOpenId);
@@ -40,7 +40,7 @@ public interface UserInfoMapper<T, P> extends BaseMapper {
 	 T selectByNickName(@Param("nickName") String nickName);
 
 	//根据NickName更新
-	 T updateByNickName(@Param("nickName") String nickName);
+	 T updateByNickName(@Param("bean") T t, @Param("nickName") String nickName);
 
 	//根据NickName删除
 	 T deleteByNickName(@Param("nickName") String nickName);

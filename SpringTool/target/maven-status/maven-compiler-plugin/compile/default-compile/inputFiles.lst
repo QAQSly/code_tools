@@ -9,6 +9,7 @@
 /root/code_tools/SpringTool/src/main/java/com/example/builder/BuildMapper.java
 /root/code_tools/SpringTool/src/main/java/com/example/builder/BuildQuery.java
 /root/code_tools/SpringTool/src/main/java/com/example/builder/BuildComment.java
+/root/code_tools/SpringTool/src/main/java/com/example/builder/BuildMapperXml.java
 /root/code_tools/SpringTool/src/main/java/com/example/builder/BuildPo.java
 /root/code_tools/SpringTool/src/main/java/com/example/bean/TableInfo.java
 /root/code_tools/SpringTool/src/main/java/com/example/entity/query/UserInfoQuery.java
