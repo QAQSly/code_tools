@@ -71,7 +71,7 @@ public class BuildMapper {
                     methodParam.append("@Param(\"" + fieldInfo.getPropertyName() + "\") " +
                             fieldInfo.getJavaType() + " " + fieldInfo.getPropertyName());
                     if (index < keyFieldInfoList.size()) {
-                        methodName.append(",");
+                        methodName.append(", ");
                     }
                 }
                 bw.newLine();
@@ -81,7 +81,7 @@ public class BuildMapper {
 
                 bw.newLine();
                 BuildComment.createFieldComment(bw, "根据" + methodName + "更新");
-                bw.write("\t T updateBy" + methodName + "(" + methodParam + ");");
+                bw.write("\t T updateBy" + methodName + "(@Param(\"bean\") T t, " + methodParam + ");");
                 bw.newLine();
 
                 bw.newLine();
