@@ -34,9 +34,10 @@ public class BuildMapperXml {
             bw.newLine();
             bw.write("<!DOCTYPE mapper PUBLIC \"-//mybatis.org// DTD Mapper 3.0//EN\"");
             bw.newLine();
-            bw.write("\t\"http://mybatis.org/dtd/mybatis-3-mapper.dtd\">");
+            bw.write("\t\t" +
+                    "\"http://mybatis.org/dtd/mybatis-3-mapper.dtd\">");
             bw.newLine();
-            bw.write("<mapper namespace=\"com.example.mappers.UserInfoMapper\">");
+            bw.write("<mapper namespace=\"" + Constants.PACKAGE_MAPPERS + "." + className + "\">");
             bw.newLine();
             bw.write("</mapper>");
 
