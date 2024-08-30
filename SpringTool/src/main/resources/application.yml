@@ -1,8 +1,8 @@
 database:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: "jdbc:mysql://localhost:3306/hua?useUnicode=true&useSSL=false&allowLoadLocalInfile=false&failOverReadOnly=false&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8&connectTimeout=1000&socketTimeout=30000"
-    username: "sly"
-    password: 
+    username: "root"
+    password: "2015672764"
 # 是否忽略表前缀
 ignore_table_prefix: true
 
@@ -14,7 +14,6 @@ ignore_bean_toJson_class: import com.fasterxml.jackson.annotation.JsonIgnore
 # 日期格式序列化
 bean_date_format_expression: "@JsonFormat(pattern = \"%s\", timezone = \"GMT+3\")"
 bean_date_format_class: import com.fasterxml.jackson.annotation.JsonFormat
-
 # 日期格式反序列化
 bean_date_unFormat_expression: "@DateTimeFormat(pattern = \"%s\")"
 bean_date_unFormat_class: import org.springframework.format.annotation.DateTimeFormat

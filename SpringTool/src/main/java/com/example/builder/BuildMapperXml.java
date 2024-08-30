@@ -39,6 +39,22 @@ public class BuildMapperXml {
             bw.newLine();
             bw.write("<mapper namespace=\"" + Constants.PACKAGE_MAPPERS + "." + className + "\">");
             bw.newLine();
+
+            bw.write("<!--实体映射-->");
+            bw.newLine();
+            String poClass = Constants.PACKAGE_PO + "." + tableInfo.getBeanName();
+            bw.write("\t<resultMap id=\"base_result_map\" type=\"" + poClass  + "\">");
+            bw.newLine();
+
+            FieldInfo idField = null;
+            // 字段
+            Map<String, List<FieldInfo>> keyIndexMap = tableInfo.getKeyIndexMap();
+            for (Map.Entry<String, List<FieldInfo>> entry : keyIndexMap.entrySet() ) {
+                List<FieldInfo> fieldInfoLists = entry.getValue();
+
+            }
+
+
             bw.write("</mapper>");
 
             bw.flush();
