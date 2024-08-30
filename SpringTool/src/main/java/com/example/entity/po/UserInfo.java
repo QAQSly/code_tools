@@ -15,7 +15,7 @@ import lombok.ToString;
 /**
  * @Description: 用户信息表
  * @author: Sly
- * @Date: 2024/08/22
+ * @Date: 2024/08/30
  */
 @Getter
 @Setter
