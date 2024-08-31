@@ -140,7 +140,7 @@ public class BuildMapperXml {
             if (ArrayUtils.contains(Constants.SQL_STRING_TYPE, fieldInfo.getSqlType())) {
                 emptyCondition = " and query." + fieldInfo.getPropertyName() + " != ''";
             }
-            bw.write("\t\t<if test=\"query." + fieldInfo.getPropertyName() + " != null\">" + emptyCondition );
+            bw.write("\t\t<if test=\"query." + fieldInfo.getPropertyName() + " != null" + emptyCondition  + "\">");
             bw.newLine();
             bw.write("\t\t\tand " + fieldInfo.getFieldName() + " = #{query." + fieldInfo.getPropertyName() + " }");
             bw.newLine();
