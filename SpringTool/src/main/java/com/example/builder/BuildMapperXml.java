@@ -73,9 +73,12 @@ public class BuildMapperXml {
                 bw.newLine();
             }
 
-            bw.newLine();
             bw.write("\t</resultMap>");
             bw.newLine();
+
+            // 通用查询列
+            QueryColumnsGenerator(bw, tableInfo);
+
 
 
             bw.write("</mapper>");
@@ -85,5 +88,23 @@ public class BuildMapperXml {
             logger.error("创建Mapper Xml失败");
             e.printStackTrace();
         }
+    }
+
+    static void QueryColumnsGenerator(BufferedWriter bw, TableInfo tableInfo) throws Exception {
+        bw.write("\t<!--通用查询列-->");
+        bw.newLine();
+
+        String base_column_list = "base_column_list";
+        bw.write("\t<sql id=\"" + base_column_list + "\">");
+        bw.newLine();
+        StringBuilder columnBuilder = new StringBuilder();
+        for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
+            columnBuilder.append(fieldInfo.getFieldName()).append(",");
+        }
+        String columnBuilderStr = columnBuilder.substring(0, columnBuilder.lastIndexOf(","));
+        bw.write("\t\t" + columnBuilderStr);
+        bw.newLine();
+        bw.write("\t</sql>");
+        bw.newLine();
     }
 }
