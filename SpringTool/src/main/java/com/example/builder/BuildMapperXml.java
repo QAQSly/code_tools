@@ -4,6 +4,7 @@ import com.example.bean.Constants;
 import com.example.bean.FieldInfo;
 import com.example.bean.TableInfo;
 import com.example.utils.StringUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,6 +14,10 @@ import java.util.Map;
 
 public class BuildMapperXml {
     public static final Logger logger = LoggerFactory.getLogger(BuildMapper.class);
+
+    private static final String BASE_COLUMN_LIST = "base_column_list";
+    private static final String BASE_CONDITION_FILED = "base_query_condition";
+    private static final String QUERY_CONDITION = "query_condition";
 
     // 执行构造
     public static void execute(TableInfo tableInfo) {
@@ -79,6 +84,9 @@ public class BuildMapperXml {
             // 通用查询列
             QueryColumnsGenerator(bw, tableInfo);
 
+            // 基础查询你条件
+            QueryConditionGenerator(bw, tableInfo);
+
 
 
             bw.write("</mapper>");
@@ -89,13 +97,18 @@ public class BuildMapperXml {
             e.printStackTrace();
         }
     }
-
+    /**
+     * @description: 通用查询结果列生成方法
+     * @param: bw tableInfo
+     * @return: void
+     * @author Sly
+     * @date: 2024/8/31 21:16
+     */
     static void QueryColumnsGenerator(BufferedWriter bw, TableInfo tableInfo) throws Exception {
-        bw.write("\t<!--通用查询列-->");
+        bw.write("\t<!--通用查询结果列-->");
         bw.newLine();
 
-        String base_column_list = "base_column_list";
-        bw.write("\t<sql id=\"" + base_column_list + "\">");
+        bw.write("\t<sql id=\"" + BASE_COLUMN_LIST + "\">");
         bw.newLine();
         StringBuilder columnBuilder = new StringBuilder();
         for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
@@ -107,4 +120,37 @@ public class BuildMapperXml {
         bw.write("\t</sql>");
         bw.newLine();
     }
+
+    /**
+     * @description: 基础查询条件
+     * @param: null
+     * @return:
+     * @author Sly
+     * @date: 2024/8/31 21:17
+     */
+    static void QueryConditionGenerator(BufferedWriter bw, TableInfo tableInfo) throws Exception {
+        bw.write("\t<!--基础查询结果列-->");
+        bw.newLine();
+
+        bw.write("\t<sql id=\"" + BASE_CONDITION_FILED + "\">");
+        bw.newLine();
+
+        for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
+            String emptyCondition = "";
+            if (ArrayUtils.contains(Constants.SQL_STRING_TYPE, fieldInfo.getJavaType())) {
+                emptyCondition = " and query." + fieldInfo.getPropertyName() + " != ''";
+            }
+            bw.write("\t\t<if test=\"query." + fieldInfo.getPropertyName() + " != null\">" + emptyCondition );
+            bw.newLine();
+            bw.write("\t\t\tand " + fieldInfo.getFieldName() + " = #{query." + fieldInfo.getPropertyName() + " }");
+            bw.newLine();
+            bw.write("\t\t</if>");
+        }
+
+        bw.newLine();
+        bw.write("\t</sql>");
+        bw.newLine();
+    }
+
+
 }
