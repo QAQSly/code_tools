@@ -35,17 +35,17 @@
 	</sql>
 	<!--基础查询结果列-->
 	<sql id="base_query_condition">
-		<if test="query.userId != null"> and query.userId != ''
+		<if test="query.userId != null and query.userId != ''">
 			and user_id = #{query.userId }
-		</if>		<if test="query.nickName != null"> and query.nickName != ''
+		</if>		<if test="query.nickName != null and query.nickName != ''">
 			and nick_name = #{query.nickName }
-		</if>		<if test="query.email != null"> and query.email != ''
+		</if>		<if test="query.email != null and query.email != ''">
 			and email = #{query.email }
-		</if>		<if test="query.qqOpenId != null"> and query.qqOpenId != ''
+		</if>		<if test="query.qqOpenId != null and query.qqOpenId != ''">
 			and qq_open_id = #{query.qqOpenId }
-		</if>		<if test="query.qqAvatar != null"> and query.qqAvatar != ''
+		</if>		<if test="query.qqAvatar != null and query.qqAvatar != ''">
 			and qq_avatar = #{query.qqAvatar }
-		</if>		<if test="query.password != null"> and query.password != ''
+		</if>		<if test="query.password != null and query.password != ''">
 			and password = #{query.password }
 		</if>		<if test="query.joinTime != null">
 			and join_time = #{query.joinTime }
