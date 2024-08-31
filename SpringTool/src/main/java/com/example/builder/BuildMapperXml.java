@@ -50,9 +50,32 @@ public class BuildMapperXml {
             // 字段
             Map<String, List<FieldInfo>> keyIndexMap = tableInfo.getKeyIndexMap();
             for (Map.Entry<String, List<FieldInfo>> entry : keyIndexMap.entrySet() ) {
-                List<FieldInfo> fieldInfoLists = entry.getValue();
+                if ("PRIMARY".equals(entry.getKey())) {
+                    List<FieldInfo> fieldInfoLists = entry.getValue();
+                    if (fieldInfoLists.size() == 1) {
+                        idField = fieldInfoLists.get(0);
+                        break;
+                    }
+                }
 
             }
+
+            for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
+                bw.write("\t\t<!-- " + fieldInfo.getComment() + " -->");
+                bw.newLine();
+                String key = "";
+                if (idField != null && fieldInfo.getPropertyName().equals(idField.getPropertyName())) {
+                    key = "id";
+                } else {
+                    key = "result";
+                }
+                bw.write("\t\t<" + key + " column=\"" + fieldInfo.getFieldName() + "\" property=\"" + fieldInfo.getPropertyName() +"\"/>");
+                bw.newLine();
+            }
+
+            bw.newLine();
+            bw.write("\t</resultMap>");
+            bw.newLine();
 
 
             bw.write("</mapper>");

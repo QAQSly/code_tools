@@ -4,4 +4,6 @@
 <mapper namespace="com.example.mappers.UserInfoMapper">
 <!--实体映射-->
 	<resultMap id="base_result_map" type="com.example.entity.po.UserInfo">
+			<result column="user_id" property="userId"/>
+	</resultMap>
 </mapper>

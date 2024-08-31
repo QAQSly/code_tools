@@ -101,7 +101,6 @@ public class BuildQuery {
                 }
             }
             List<FieldInfo> fieldInfoList = tableInfo.getFieldList();
-            fieldInfoList.addAll(extendList);
 
             bw.write("}");
             bw.flush();
