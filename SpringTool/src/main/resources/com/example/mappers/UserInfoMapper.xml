@@ -76,7 +76,7 @@
 	</sql>
 
 	<!--扩展查询条件-->
-	<sql id="query_condition">
+	<sql id="base_query_condition_extend">
 		<if test="query.userIdFuzzy != null and query.userIdFuzzy != ''">
 			 and user_id like concat('%', #{query.userIdFuzzy}, '%')
 		</if>
@@ -107,5 +107,12 @@
 		<if test="query.lastLoginTimeEnd != null and query.lastLoginTimeEnd != ''">
 			<![CDATA[ and last_login_time < date_sub(str_to_date(#{query.lastLoginTimeEnd}, '%Y-%m-%d'), interval -1 day) ]]>
 		</if>
+	</sql>
+	<!--通用查询条件-->
+	<sql id="query_condition">
+		<where>
+			<include refid="base_query_condition"
+			<include refid="base_query_condition_extend"
+		</where>
 	</sql>
 </mapper>
