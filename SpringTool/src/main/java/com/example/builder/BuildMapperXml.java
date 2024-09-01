@@ -16,7 +16,8 @@ public class BuildMapperXml {
     public static final Logger logger = LoggerFactory.getLogger(BuildMapper.class);
 
     private static final String BASE_COLUMN_LIST = "base_column_list";
-    private static final String BASE_CONDITION_FILED = "base_query_condition";
+    private static final String BASE_QUERY_CONDITION = "base_query_condition";
+    private static final String BASE_QUERY_CONDITION_EXTEND = "base_query_condition_extend";
     private static final String QUERY_CONDITION = "query_condition";
 
     // 执行构造
@@ -93,6 +94,9 @@ public class BuildMapperXml {
             //  扩展查询条件
             QueryExtendConditionGenerator(bw, tableInfo);
 
+            // 通用查询条件
+            QueryConditionIncludeGenerator(bw, tableInfo);
+
             bw.write("</mapper>");
 
             bw.flush();
@@ -136,7 +140,7 @@ public class BuildMapperXml {
         bw.write("\t<!--基础查询结果列-->");
         bw.newLine();
 
-        bw.write("\t<sql id=\"" + BASE_CONDITION_FILED + "\">");
+        bw.write("\t<sql id=\"" + BASE_QUERY_CONDITION + "\">");
         bw.newLine();
 
         for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
@@ -166,7 +170,7 @@ tableInfo
         bw.write("\t<!--扩展查询条件-->");
         bw.newLine();
 
-        bw.write("\t<sql id=\"" + QUERY_CONDITION + "\">");
+        bw.write("\t<sql id=\"" + BASE_QUERY_CONDITION_EXTEND + "\">");
         bw.newLine();
 
         for (FieldInfo fieldInfo : tableInfo.getFieldExtendList()) {
@@ -188,6 +192,37 @@ tableInfo
             bw.write("\t\t</if>");
             bw.newLine();
         }
+        bw.write("\t</sql>");
+        bw.newLine();
+    }
+
+    /**
+     * @description: 通用查询条件
+     * @param: bw
+tableInfo
+     * @return: void
+     * @author Sly
+     * @date: 2024/9/1 22:35
+     */
+    static void QueryConditionIncludeGenerator(BufferedWriter bw, TableInfo tableInfo) throws Exception {
+        bw.write("\t<!--通用查询条件-->");
+        bw.newLine();
+
+        bw.write("\t<sql id=\"" + QUERY_CONDITION + "\">");
+        bw.newLine();
+
+        bw.write("\t\t<where>");
+        bw.newLine();
+
+        bw.write("\t\t\t<include refid=\"" + BASE_QUERY_CONDITION + "\"");
+        bw.newLine();
+
+        bw.write("\t\t\t<include refid=\"" + BASE_QUERY_CONDITION_EXTEND+ "\"");
+        bw.newLine();
+
+        bw.write("\t\t</where>");
+        bw.newLine();
+
         bw.write("\t</sql>");
         bw.newLine();
     }
