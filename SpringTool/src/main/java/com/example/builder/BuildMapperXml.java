@@ -93,9 +93,15 @@ public class BuildMapperXml {
 
             //  扩展查询条件
             QueryExtendConditionGenerator(bw, tableInfo);
+            bw.newLine();
 
             // 通用查询条件
             QueryConditionIncludeGenerator(bw, tableInfo);
+            bw.newLine();
+
+            // 查询集合
+            QuerySetGenerator(bw, tableInfo);
+            bw.newLine();
 
             bw.write("</mapper>");
 
@@ -224,6 +230,26 @@ tableInfo
         bw.newLine();
 
         bw.write("\t</sql>");
+        bw.newLine();
+    }
+
+    /**
+     * @description: 查询集合生成
+     * @param: null
+     * @return:
+     * @author Sly
+     * @date: 2024/9/1 22:49
+     */
+    static void QuerySetGenerator(BufferedWriter bw, TableInfo tableInfo) throws Exception
+    {
+        bw.write("\t<!--通用查询条件-->");
+        bw.newLine();
+
+        bw.write("<select id=\"selectList\" resultMap=\"base_result_map\">");
+        bw.newLine();
+
+        bw.write("SELECT <include refid=\"" + BASE_COLUMN_LIST + "\"/> FROM " + tableInfo.getTableName() + " <include refid=\"" + QUERY_CONDITION + "\"/>");
+        bw.write("/select>");
         bw.newLine();
     }
 
