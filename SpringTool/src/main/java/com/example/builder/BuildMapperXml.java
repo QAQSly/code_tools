@@ -175,7 +175,11 @@ tableInfo
                 andWhere = " and " + fieldInfo.getFieldName() +  " like concat('%', #{query." + fieldInfo.getPropertyName() + "}, '%')";
             } else if (ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, fieldInfo.getSqlType()) ||
             ArrayUtils.contains(Constants.SQL_DATE_TYPES, fieldInfo.getSqlType())) {
-                andWhere = "<![CDATA[ and " +  fieldInfo.getFieldName() + " >= str_to_date(#{query." + fieldInfo.getPropertyName() + "}, '%Y-%m-%d') ]]>";
+                if (fieldInfo.getPropertyName().endsWith(Constants.SUFFIX_BEAN_QUERY_START)) {
+                    andWhere = "<![CDATA[ and " +  fieldInfo.getFieldName() + " >= str_to_date(#{query." + fieldInfo.getPropertyName() + "}, '%Y-%m-%d') ]]>";
+                } else if (fieldInfo.getPropertyName().endsWith(Constants.SUFFIX_BEAN_QUERY_END)) {
+                    andWhere = "<![CDATA[ and " +  fieldInfo.getFieldName() + " < date_sub(str_to_date(#{query." + fieldInfo.getPropertyName() + "}, '%Y-%m-%d'), interval -1 day) ]]>";
+                }
             }
             bw.write("\t\t<if test=\"query." + fieldInfo.getPropertyName() + " != null" + " and query." + fieldInfo.getPropertyName() + " != ''"  + "\">");
             bw.newLine();
