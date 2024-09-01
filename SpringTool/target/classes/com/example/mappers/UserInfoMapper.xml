@@ -29,10 +29,12 @@
 		<!-- 0: deleted, 1: normal -->
 		<result column="is_del" property="isDel"/>
 	</resultMap>
+
 	<!--通用查询结果列-->
 	<sql id="base_column_list">
 		user_id,nick_name,email,qq_open_id,qq_avatar,password,join_time,last_login_time,status,use_space,total_space,is_del
 	</sql>
+
 	<!--基础查询结果列-->
 	<sql id="base_query_condition">
 		<if test="query.userId != null and query.userId != ''">
