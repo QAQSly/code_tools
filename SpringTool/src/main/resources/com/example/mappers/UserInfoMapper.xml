@@ -36,76 +36,76 @@
 	</sql>
 
 	<!--基础查询结果列-->
-	<sql id="query_condition">
-		<if test="query.userIdFuzzy != null and query.userIdFuzzy != ''">
-			and user_id = #{query.userIdFuzzy }
+	<sql id="base_query_condition">
+		<if test="query.userId != null and query.userId != ''">
+			and user_id = #{query.userId }
 		</if>
-		<if test="query.nickNameFuzzy != null and query.nickNameFuzzy != ''">
-			and nick_name = #{query.nickNameFuzzy }
+		<if test="query.nickName != null and query.nickName != ''">
+			and nick_name = #{query.nickName }
 		</if>
-		<if test="query.emailFuzzy != null and query.emailFuzzy != ''">
-			and email = #{query.emailFuzzy }
+		<if test="query.email != null and query.email != ''">
+			and email = #{query.email }
 		</if>
-		<if test="query.qqOpenIdFuzzy != null and query.qqOpenIdFuzzy != ''">
-			and qq_open_id = #{query.qqOpenIdFuzzy }
+		<if test="query.qqOpenId != null and query.qqOpenId != ''">
+			and qq_open_id = #{query.qqOpenId }
 		</if>
-		<if test="query.qqAvatarFuzzy != null and query.qqAvatarFuzzy != ''">
-			and qq_avatar = #{query.qqAvatarFuzzy }
+		<if test="query.qqAvatar != null and query.qqAvatar != ''">
+			and qq_avatar = #{query.qqAvatar }
 		</if>
-		<if test="query.passwordFuzzy != null and query.passwordFuzzy != ''">
-			and password = #{query.passwordFuzzy }
+		<if test="query.password != null and query.password != ''">
+			and password = #{query.password }
 		</if>
-		<if test="query.joinTimeStart != null">
-			and null = #{query.joinTimeStart }
+		<if test="query.joinTime != null">
+			and join_time = #{query.joinTime }
 		</if>
-		<if test="query.joinTimeEnd != null">
-			and null = #{query.joinTimeEnd }
+		<if test="query.lastLoginTime != null">
+			and last_login_time = #{query.lastLoginTime }
 		</if>
-		<if test="query.lastLoginTimeStart != null">
-			and null = #{query.lastLoginTimeStart }
+		<if test="query.status != null">
+			and status = #{query.status }
 		</if>
-		<if test="query.lastLoginTimeEnd != null">
-			and null = #{query.lastLoginTimeEnd }
+		<if test="query.useSpace != null">
+			and use_space = #{query.useSpace }
+		</if>
+		<if test="query.totalSpace != null">
+			and total_space = #{query.totalSpace }
+		</if>
+		<if test="query.isDel != null">
+			and is_del = #{query.isDel }
 		</if>
 	</sql>
 
 	<!--扩展查询条件-->
-	<sql id="base_query_condition">
-		<if test="query.userId != null and query.userId != ''">
-			 and user_id like concat('%', #{query.userId}, '%')
+	<sql id="query_condition">
+		<if test="query.userIdFuzzy != null and query.userIdFuzzy != ''">
+			 and user_id like concat('%', #{query.userIdFuzzy}, '%')
 		</if>
-		<if test="query.nickName != null and query.nickName != ''">
-			 and nick_name like concat('%', #{query.nickName}, '%')
+		<if test="query.nickNameFuzzy != null and query.nickNameFuzzy != ''">
+			 and nick_name like concat('%', #{query.nickNameFuzzy}, '%')
 		</if>
-		<if test="query.email != null and query.email != ''">
-			 and email like concat('%', #{query.email}, '%')
+		<if test="query.emailFuzzy != null and query.emailFuzzy != ''">
+			 and email like concat('%', #{query.emailFuzzy}, '%')
 		</if>
-		<if test="query.qqOpenId != null and query.qqOpenId != ''">
-			 and qq_open_id like concat('%', #{query.qqOpenId}, '%')
+		<if test="query.qqOpenIdFuzzy != null and query.qqOpenIdFuzzy != ''">
+			 and qq_open_id like concat('%', #{query.qqOpenIdFuzzy}, '%')
 		</if>
-		<if test="query.qqAvatar != null and query.qqAvatar != ''">
-			 and qq_avatar like concat('%', #{query.qqAvatar}, '%')
+		<if test="query.qqAvatarFuzzy != null and query.qqAvatarFuzzy != ''">
+			 and qq_avatar like concat('%', #{query.qqAvatarFuzzy}, '%')
 		</if>
-		<if test="query.password != null and query.password != ''">
-			 and password like concat('%', #{query.password}, '%')
+		<if test="query.passwordFuzzy != null and query.passwordFuzzy != ''">
+			 and password like concat('%', #{query.passwordFuzzy}, '%')
 		</if>
-		<if test="query.joinTime != null and query.joinTime != ''">
-			<![CDATA[ andjoin_time >= str_to_date(#{query.joinTime}, '%Y-%m-%d) ]]>
+		<if test="query.joinTimeStart != null and query.joinTimeStart != ''">
+			<![CDATA[ andnull >= str_to_date(#{query.joinTimeStart}, '%Y-%m-%d) ]]>
 		</if>
-		<if test="query.lastLoginTime != null and query.lastLoginTime != ''">
-			<![CDATA[ andlast_login_time >= str_to_date(#{query.lastLoginTime}, '%Y-%m-%d) ]]>
+		<if test="query.joinTimeEnd != null and query.joinTimeEnd != ''">
+			<![CDATA[ andnull >= str_to_date(#{query.joinTimeEnd}, '%Y-%m-%d) ]]>
 		</if>
-		<if test="query.status != null and query.status != ''">
-			
+		<if test="query.lastLoginTimeStart != null and query.lastLoginTimeStart != ''">
+			<![CDATA[ andnull >= str_to_date(#{query.lastLoginTimeStart}, '%Y-%m-%d) ]]>
 		</if>
-		<if test="query.useSpace != null and query.useSpace != ''">
-			
-		</if>
-		<if test="query.totalSpace != null and query.totalSpace != ''">
-			
-		</if>
-		<if test="query.isDel != null and query.isDel != ''">
-			
+		<if test="query.lastLoginTimeEnd != null and query.lastLoginTimeEnd != ''">
+			<![CDATA[ andnull >= str_to_date(#{query.lastLoginTimeEnd}, '%Y-%m-%d) ]]>
 		</if>
 	</sql>
 </mapper>
