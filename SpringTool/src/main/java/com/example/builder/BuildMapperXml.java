@@ -93,8 +93,6 @@ public class BuildMapperXml {
             //  扩展查询条件
             QueryExtendConditionGenerator(bw, tableInfo);
 
-
-
             bw.write("</mapper>");
 
             bw.flush();
@@ -138,10 +136,10 @@ public class BuildMapperXml {
         bw.write("\t<!--基础查询结果列-->");
         bw.newLine();
 
-        bw.write("\t<sql id=\"" + QUERY_CONDITION + "\">");
+        bw.write("\t<sql id=\"" + BASE_CONDITION_FILED + "\">");
         bw.newLine();
 
-        for (FieldInfo fieldInfo : tableInfo.getFieldExtendList()) {
+        for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
             String emptyCondition = "";
             if (ArrayUtils.contains(Constants.SQL_STRING_TYPE, fieldInfo.getSqlType())) {
                 emptyCondition = " and query." + fieldInfo.getPropertyName() + " != ''";
@@ -168,10 +166,10 @@ tableInfo
         bw.write("\t<!--扩展查询条件-->");
         bw.newLine();
 
-        bw.write("\t<sql id=\"" + BASE_CONDITION_FILED + "\">");
+        bw.write("\t<sql id=\"" + QUERY_CONDITION + "\">");
         bw.newLine();
 
-        for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
+        for (FieldInfo fieldInfo : tableInfo.getFieldExtendList()) {
             String andWhere = "";
             if (ArrayUtils.contains(Constants.SQL_STRING_TYPE, fieldInfo.getSqlType())) {
                 andWhere = " and " + fieldInfo.getFieldName() +  " like concat('%', #{query." + fieldInfo.getPropertyName() + "}, '%')";
