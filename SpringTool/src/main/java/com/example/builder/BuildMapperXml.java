@@ -88,6 +88,10 @@ public class BuildMapperXml {
             bw.newLine();
             // 基础查询你条件
             QueryConditionGenerator(bw, tableInfo);
+            bw.newLine();
+
+            //  扩展查询条件
+            QueryExtendConditionGenerator(bw, tableInfo);
 
 
 
@@ -131,6 +135,25 @@ public class BuildMapperXml {
      * @date: 2024/8/31 21:17
      */
     static void QueryConditionGenerator(BufferedWriter bw, TableInfo tableInfo) throws Exception {
+        bw.write("\t<!--基础查询结果列-->");
+        bw.newLine();
+
+        bw.write("\t<sql id=\"" + QUERY_CONDITION + "\">");
+        bw.newLine();
+
+        for (FieldInfo fieldInfo : tableInfo.getFieldExtendList()) {
+            bw.write("\t\t<if test=\"query." + fieldInfo.getPropertyName() + " != null" + " and query." + fieldInfo.getPropertyName() + " != ''"  + "\">");
+            bw.newLine();
+            bw.write("\t\t\tand " + fieldInfo.getFieldName() + " = #{query." + fieldInfo.getPropertyName() + " }");
+            bw.newLine();
+            bw.write("\t\t</if>");
+            bw.newLine();
+        }
+        bw.write("\t</sql>");
+        bw.newLine();
+    }
+
+    static void QueryExtendConditionGenerator(BufferedWriter bw, TableInfo tableInfo) throws Exception {
         bw.write("\t<!--基础查询结果列-->");
         bw.newLine();
 
