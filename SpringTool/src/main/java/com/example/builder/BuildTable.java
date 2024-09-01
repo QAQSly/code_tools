@@ -23,6 +23,7 @@ public class BuildTable {
     private static String SQL_SHOW_TABLE_STATUS = "show table status";
     private static String SQL_SHOW_TABLE_FIELDS = "show full fields from %s";
     private static String SQL_SHOW_TABLE_INDEX = "show index from %s";
+
     static {
        String dirverName = YmlUtils.getString("driverClassName");// 获取mysql驱动
        String url = YmlUtils.getString("url");
@@ -129,6 +130,7 @@ public class BuildTable {
     public static void getFields(TableInfo tableInfo) {
 
         List<FieldInfo> fieldInfoList = new ArrayList();
+        List<FieldInfo> fieldExtendList = new ArrayList<>();
 
         try (PreparedStatement ps = conn.prepareStatement(String.format(SQL_SHOW_TABLE_FIELDS, tableInfo.getTableName()));
         ResultSet fieldResult = ps.executeQuery()) {
@@ -167,13 +169,41 @@ public class BuildTable {
                     haveBigDecimal = true;
                 }
 
-                tableInfo.setHaveDateTime(haveDateTime);
-                tableInfo.setHaveDate(haveDate);
-                tableInfo.setHavaBigDecimal(haveBigDecimal);
+
+
+                // extend
+                if (ArrayUtils.contains(Constants.SQL_STRING_TYPE, type)) {
+
+                    FieldInfo fuzzyField = new FieldInfo();
+                    fuzzyField.setJavaType(fieldInfo.getJavaType());
+                    fuzzyField.setPropertyName(propertyName + Constants.SUFFIX_BEAN_QUERY_FUZZY);
+                    fuzzyField.setFieldName(fieldInfo.getFieldName());
+                    fieldExtendList.add(fuzzyField);
+                }
+
+                if (ArrayUtils.contains(Constants.SQL_DATE_TYPES, type) ||
+                        ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, type)) {
+                    String propertyStartName = fieldInfo.getPropertyName() +  Constants.SUFFIX_BEAN_QUERY_START;
+                    String propertyEndName = fieldInfo.getPropertyName() + Constants.SUFFIX_BEAN_QUERY_END;
+                    FieldInfo timeStartField = new FieldInfo();
+                    timeStartField.setJavaType("String");
+                    timeStartField.setPropertyName(propertyStartName);
+                    fieldExtendList.add(timeStartField);
+
+                    FieldInfo timeEndField = new FieldInfo();
+                    timeEndField.setJavaType("String");
+                    timeEndField.setPropertyName(propertyEndName);
+                    fieldExtendList.add(timeEndField);
+
+                }
 
             }
 
             tableInfo.setFieldList(fieldInfoList);
+            tableInfo.setHaveDateTime(haveDateTime);
+            tableInfo.setHaveDate(haveDate);
+            tableInfo.setHavaBigDecimal(haveBigDecimal);
+            tableInfo.setFieldExtendList(fieldExtendList);
         } catch (Exception e) {
             logger.error("读取字段信息失败", e);
         }

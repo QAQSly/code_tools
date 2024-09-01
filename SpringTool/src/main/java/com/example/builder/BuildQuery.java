@@ -70,10 +70,6 @@ public class BuildQuery {
                     bw.newLine();
                     bw.newLine();
 
-                    FieldInfo fuzzyField = new FieldInfo();
-                    fuzzyField.setJavaType(fieldInfo.getJavaType());
-                    fuzzyField.setPropertyName(propertyName);
-                    extendList.add(fuzzyField);
                 }
 
                 if (ArrayUtils.contains(Constants.SQL_DATE_TYPES, fieldInfo.getSqlType()) ||
@@ -87,20 +83,8 @@ public class BuildQuery {
                     bw.write("\tprivate " + fieldInfo.getJavaType() + " " + propertyEndName + ";");
                     bw.newLine();
                     bw.newLine();
-
-                    FieldInfo timeStartField = new FieldInfo();
-                    timeStartField.setJavaType("String");
-                    timeStartField.setPropertyName(propertyStartName);
-                    extendList.add(timeStartField);
-
-                    FieldInfo timeEndField = new FieldInfo();
-                    timeEndField.setJavaType("String");
-                    timeEndField.setPropertyName(propertyEndName);
-                    extendList.add(timeEndField);
-
                 }
             }
-            List<FieldInfo> fieldInfoList = tableInfo.getFieldList();
 
             bw.write("}");
             bw.flush();

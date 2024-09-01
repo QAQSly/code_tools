@@ -21,6 +21,8 @@ public class TableInfo {
     private String comment;
     // field
     private List<FieldInfo> fieldList;
+    // field extend
+    private List<FieldInfo> fieldExtendList;
     // nique 索引
     private Map<String, List<FieldInfo>> keyIndexMap = new LinkedHashMap();
     // date

@@ -81,9 +81,11 @@ public class BuildMapperXml {
             bw.write("\t</resultMap>");
             bw.newLine();
 
+            bw.newLine();
             // 通用查询列
             QueryColumnsGenerator(bw, tableInfo);
 
+            bw.newLine();
             // 基础查询你条件
             QueryConditionGenerator(bw, tableInfo);
 
