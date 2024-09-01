@@ -214,10 +214,10 @@ tableInfo
         bw.write("\t\t<where>");
         bw.newLine();
 
-        bw.write("\t\t\t<include refid=\"" + BASE_QUERY_CONDITION + "\"");
+        bw.write("\t\t\t<include refid=\"" + BASE_QUERY_CONDITION + "\"/>");
         bw.newLine();
 
-        bw.write("\t\t\t<include refid=\"" + BASE_QUERY_CONDITION_EXTEND+ "\"");
+        bw.write("\t\t\t<include refid=\"" + BASE_QUERY_CONDITION_EXTEND+ "\"/>");
         bw.newLine();
 
         bw.write("\t\t</where>");
