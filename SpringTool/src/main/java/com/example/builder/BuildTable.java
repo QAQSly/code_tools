@@ -190,12 +190,14 @@ public class BuildTable {
                     timeStartField.setJavaType("String");
                     timeStartField.setPropertyName(propertyStartName);
                     timeStartField.setSqlType(fieldInfo.getSqlType());
+                    timeStartField.setFieldName(fieldInfo.getSqlType());
                     fieldExtendList.add(timeStartField);
 
                     FieldInfo timeEndField = new FieldInfo();
                     timeEndField.setJavaType("String");
                     timeEndField.setPropertyName(propertyEndName);
                     timeEndField.setSqlType(fieldInfo.getSqlType());
+                    timeEndField.setFieldName(fieldInfo.getFieldName());
                     fieldExtendList.add(timeEndField);
 
                 }
