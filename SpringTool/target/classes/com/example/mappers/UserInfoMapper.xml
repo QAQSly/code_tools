@@ -111,8 +111,8 @@
 	<!--通用查询条件-->
 	<sql id="query_condition">
 		<where>
-			<include refid="base_query_condition"
-			<include refid="base_query_condition_extend"
+			<include refid="base_query_condition"/>
+			<include refid="base_query_condition_extend"/>
 		</where>
 	</sql>
 </mapper>
