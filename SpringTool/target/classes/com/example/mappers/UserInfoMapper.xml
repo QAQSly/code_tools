@@ -36,6 +36,40 @@
 	</sql>
 
 	<!--基础查询结果列-->
+	<sql id="query_condition">
+		<if test="query.userIdFuzzy != null and query.userIdFuzzy != ''">
+			and user_id = #{query.userIdFuzzy }
+		</if>
+		<if test="query.nickNameFuzzy != null and query.nickNameFuzzy != ''">
+			and nick_name = #{query.nickNameFuzzy }
+		</if>
+		<if test="query.emailFuzzy != null and query.emailFuzzy != ''">
+			and email = #{query.emailFuzzy }
+		</if>
+		<if test="query.qqOpenIdFuzzy != null and query.qqOpenIdFuzzy != ''">
+			and qq_open_id = #{query.qqOpenIdFuzzy }
+		</if>
+		<if test="query.qqAvatarFuzzy != null and query.qqAvatarFuzzy != ''">
+			and qq_avatar = #{query.qqAvatarFuzzy }
+		</if>
+		<if test="query.passwordFuzzy != null and query.passwordFuzzy != ''">
+			and password = #{query.passwordFuzzy }
+		</if>
+		<if test="query.joinTimeStart != null and query.joinTimeStart != ''">
+			and null = #{query.joinTimeStart }
+		</if>
+		<if test="query.joinTimeEnd != null and query.joinTimeEnd != ''">
+			and null = #{query.joinTimeEnd }
+		</if>
+		<if test="query.lastLoginTimeStart != null and query.lastLoginTimeStart != ''">
+			and null = #{query.lastLoginTimeStart }
+		</if>
+		<if test="query.lastLoginTimeEnd != null and query.lastLoginTimeEnd != ''">
+			and null = #{query.lastLoginTimeEnd }
+		</if>
+	</sql>
+
+	<!--基础查询结果列-->
 	<sql id="base_query_condition">
 		<if test="query.userId != null and query.userId != ''">
 			and user_id = #{query.userId }
