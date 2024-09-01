@@ -178,6 +178,7 @@ public class BuildTable {
                     fuzzyField.setJavaType(fieldInfo.getJavaType());
                     fuzzyField.setPropertyName(propertyName + Constants.SUFFIX_BEAN_QUERY_FUZZY);
                     fuzzyField.setFieldName(fieldInfo.getFieldName());
+                    fuzzyField.setSqlType(fieldInfo.getSqlType());
                     fieldExtendList.add(fuzzyField);
                 }
 
@@ -188,11 +189,13 @@ public class BuildTable {
                     FieldInfo timeStartField = new FieldInfo();
                     timeStartField.setJavaType("String");
                     timeStartField.setPropertyName(propertyStartName);
+                    timeStartField.setSqlType(fieldInfo.getSqlType());
                     fieldExtendList.add(timeStartField);
 
                     FieldInfo timeEndField = new FieldInfo();
                     timeEndField.setJavaType("String");
                     timeEndField.setPropertyName(propertyEndName);
+                    timeEndField.setSqlType(fieldInfo.getSqlType());
                     fieldExtendList.add(timeEndField);
 
                 }

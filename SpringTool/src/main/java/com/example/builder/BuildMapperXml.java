@@ -142,7 +142,11 @@ public class BuildMapperXml {
         bw.newLine();
 
         for (FieldInfo fieldInfo : tableInfo.getFieldExtendList()) {
-            bw.write("\t\t<if test=\"query." + fieldInfo.getPropertyName() + " != null" + " and query." + fieldInfo.getPropertyName() + " != ''"  + "\">");
+            String emptyCondition = "";
+            if (ArrayUtils.contains(Constants.SQL_STRING_TYPE, fieldInfo.getSqlType())) {
+                emptyCondition = " and query." + fieldInfo.getPropertyName() + " != ''";
+            }
+            bw.write("\t\t<if test=\"query." + fieldInfo.getPropertyName() + " != null" + emptyCondition  + "\">");
             bw.newLine();
             bw.write("\t\t\tand " + fieldInfo.getFieldName() + " = #{query." + fieldInfo.getPropertyName() + " }");
             bw.newLine();
@@ -152,22 +156,32 @@ public class BuildMapperXml {
         bw.write("\t</sql>");
         bw.newLine();
     }
-
+    /**
+     * @description: 扩展查询条件生成方法
+     * @param: bw
+tableInfo
+     * @return: void
+     * @author Sly
+     * @date: 2024/9/1 21:27
+     */
     static void QueryExtendConditionGenerator(BufferedWriter bw, TableInfo tableInfo) throws Exception {
-        bw.write("\t<!--基础查询结果列-->");
+        bw.write("\t<!--扩展查询条件-->");
         bw.newLine();
 
         bw.write("\t<sql id=\"" + BASE_CONDITION_FILED + "\">");
         bw.newLine();
 
         for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
-            String emptyCondition = "";
+            String andWhere = "";
             if (ArrayUtils.contains(Constants.SQL_STRING_TYPE, fieldInfo.getSqlType())) {
-                emptyCondition = " and query." + fieldInfo.getPropertyName() + " != ''";
+                andWhere = " and " + fieldInfo.getFieldName() +  " like concat('%', #{query." + fieldInfo.getPropertyName() + "}, '%')";
+            } else if (ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, fieldInfo.getSqlType()) ||
+            ArrayUtils.contains(Constants.SQL_DATE_TYPES, fieldInfo.getSqlType())) {
+                andWhere = "<![CDATA[ and" +  fieldInfo.getFieldName() + " >= str_to_date(#{query." + fieldInfo.getPropertyName() + "}, '%Y-%m-%d) ]]>";
             }
-            bw.write("\t\t<if test=\"query." + fieldInfo.getPropertyName() + " != null" + emptyCondition  + "\">");
+            bw.write("\t\t<if test=\"query." + fieldInfo.getPropertyName() + " != null" + " and query." + fieldInfo.getPropertyName() + " != ''"  + "\">");
             bw.newLine();
-            bw.write("\t\t\tand " + fieldInfo.getFieldName() + " = #{query." + fieldInfo.getPropertyName() + " }");
+            bw.write("\t\t\t" + andWhere);
             bw.newLine();
             bw.write("\t\t</if>");
             bw.newLine();
