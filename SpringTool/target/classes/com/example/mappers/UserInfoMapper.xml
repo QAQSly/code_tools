@@ -96,16 +96,16 @@
 			 and password like concat('%', #{query.passwordFuzzy}, '%')
 		</if>
 		<if test="query.joinTimeStart != null and query.joinTimeStart != ''">
-			<![CDATA[ and datetime >= str_to_date(#{query.joinTimeStart}, %Y-%m-%d) ]]>
+			<![CDATA[ and join_time >= str_to_date(#{query.joinTimeStart}, '%Y-%m-%d') ]]>
 		</if>
 		<if test="query.joinTimeEnd != null and query.joinTimeEnd != ''">
-			<![CDATA[ and join_time >= str_to_date(#{query.joinTimeEnd}, %Y-%m-%d) ]]>
+			<![CDATA[ and join_time >= str_to_date(#{query.joinTimeEnd}, '%Y-%m-%d') ]]>
 		</if>
 		<if test="query.lastLoginTimeStart != null and query.lastLoginTimeStart != ''">
-			<![CDATA[ and datetime >= str_to_date(#{query.lastLoginTimeStart}, %Y-%m-%d) ]]>
+			<![CDATA[ and last_login_time >= str_to_date(#{query.lastLoginTimeStart}, '%Y-%m-%d') ]]>
 		</if>
 		<if test="query.lastLoginTimeEnd != null and query.lastLoginTimeEnd != ''">
-			<![CDATA[ and last_login_time >= str_to_date(#{query.lastLoginTimeEnd}, %Y-%m-%d) ]]>
+			<![CDATA[ and last_login_time >= str_to_date(#{query.lastLoginTimeEnd}, '%Y-%m-%d') ]]>
 		</if>
 	</sql>
 </mapper>
