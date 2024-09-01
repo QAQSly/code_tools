@@ -9,7 +9,7 @@ import lombok.ToString;
 /**
  * @Description: 用户信息表查询对象
  * @author: Sly
- * @Date: 2024/08/31
+ * @Date: 2024/09/01
  */
 @Getter
 @Setter
