@@ -242,13 +242,13 @@ tableInfo
      */
     static void QuerySetGenerator(BufferedWriter bw, TableInfo tableInfo) throws Exception
     {
-        bw.write("\t<!--通用查询条件-->");
+        bw.write("\t<!--通用查询集合-->");
         bw.newLine();
 
-        bw.write("<select id=\"selectList\" resultMap=\"base_result_map\">");
+        bw.write("\t<select id=\"selectList\" resultMap=\"base_result_map\">");
         bw.newLine();
 
-        bw.write("SELECT <include refid=\"" + BASE_COLUMN_LIST + "\"/> FROM " + tableInfo.getTableName() + " <include refid=\"" + QUERY_CONDITION + "\"/>");
+        bw.write("\t\tSELECT <include refid=\"" + BASE_COLUMN_LIST + "\"/> FROM " + tableInfo.getTableName() + " <include refid=\"" + QUERY_CONDITION + "\"/>");
         bw.write("/select>");
         bw.newLine();
     }
