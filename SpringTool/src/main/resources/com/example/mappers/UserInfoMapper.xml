@@ -117,8 +117,8 @@
 		</where>
 	</sql>
 
-	<!--通用查询条件-->
-<select id="selectList" resultMap="base_result_map">
-SELECT <include refid="base_column_list"/> FROM user_info <include refid="query_condition"/>/select>
+	<!--通用查询集合-->
+	<select id="selectList" resultMap="base_result_map">
+		SELECT <include refid="base_column_list"/> FROM user_info <include refid="query_condition"/>/select>
 
 </mapper>
