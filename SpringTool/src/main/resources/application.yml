@@ -32,7 +32,7 @@ suffix_bean_query_end : End
 suffix_mappers : Mapper
 
 # 文件输出路径
-path_base: /root/code_tools/SpringTool/src/main/
+path_base: /root/bat/root/code_tools/SpringTool/src/main/
 
 #包名
 package_base: com.example
