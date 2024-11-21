@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # move dir
-cd /root/code_tools/SpringTool
+cd /root/bat/root/code_tools/SpringTool
 
 # maven 
 mvn clean install
